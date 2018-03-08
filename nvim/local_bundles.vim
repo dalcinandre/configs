@@ -1,0 +1,8 @@
+Plug 'ryanoasis/vim-devicons'
+Plug '~/.fzf'
+Plug 'posva/vim-vue'
+Plug 'tpope/vim-abolish'
+Plug 'vim-scripts/AutoComplPop'
+Plug 'vim-scripts/Tabular'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'Xuyuanp/nerdtree-git-plugin'
