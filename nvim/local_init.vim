@@ -1,4 +1,15 @@
-set list listchars=tab:⟶\ ,trail:.
+let g:vrc_curl_opts = {
+            \ '-s': '',
+            \ '-S': '',
+            \ '-4': '',
+            \ '-k': '',
+            \ '--compressed': '',
+            \ '--location': '',
+            \}
+
+let g:vrc_response_default_content_type = 'application/json'
+
+" set list listchars=tab:⟶\ ,trail:.
 
 set hidden
 set nowrap
@@ -6,6 +17,16 @@ set noic
 set bg=light
 set inccommand=split
 set fileencodings=utf-8
+
+set ttyfast
+set cursorline
+set hls
+
+" vim-javascript
+augroup vimrc-rest
+    autocmd!
+    autocmd FileType rest set tabstop=2|set shiftwidth=2|set expandtab softtabstop=2
+augroup END
 
 " vim-javascript
 augroup vimrc-javascript
