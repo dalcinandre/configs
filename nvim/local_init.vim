@@ -18,8 +18,11 @@ set bg=light
 set inccommand=split
 set fileencodings=utf-8
 
+" deixar transparente o editor
+hi Normal guibg=NONE ctermbg=NONE
+
 set ttyfast
-set cursorline
+" set cursorline
 set hls
 
 " vim-javascript
