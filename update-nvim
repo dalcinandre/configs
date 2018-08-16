@@ -1,0 +1,7 @@
+#!/bin/bash
+#
+
+for i in {nvim,vim};
+do
+    "${i}" +VimBootstrapUpdate +PlugInstall +PlugUpgrade +PlugUpdate +PlugClean +qa
+done && notify-send -i 'system-software-update' -u normal -t 50000 'Updated vim and nvim!' 'Softwares Updated successful'
