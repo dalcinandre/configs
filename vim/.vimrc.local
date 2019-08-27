@@ -34,6 +34,8 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+
 " noremap <up> :echoerr 'Use k to up'<CR>
 " noremap <down> :echoerr 'Use j to down'<CR>
 " noremap <left> :echoerr 'Use h to left'<CR>

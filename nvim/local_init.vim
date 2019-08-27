@@ -50,6 +50,7 @@ let g:airline_theme = 'badwolf'
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%{FugitiveStatusline()}
 set statusline+=%*
 
 let g:syntastic_javascript_checkers=['eslint']
