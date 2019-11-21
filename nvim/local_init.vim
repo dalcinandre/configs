@@ -1,3 +1,5 @@
+set encoding=UTF-8
+
 let g:vrc_curl_opts = {
             \ '-s': '',
             \ '-S': '',
@@ -17,6 +19,10 @@ set noic
 set bg=light
 set inccommand=split
 set fileencodings=utf-8
+
+" set path+=**
+autocmd BufWritePre * %s/\s\+$//e
+autocmd BufWritePre * %s///e
 
 " deixar transparente o editor
 hi Normal guibg=NONE ctermbg=NONE
