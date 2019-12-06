@@ -1,3 +1,9 @@
+call plug#begin('~/.vim/plugged')
+Plug 'kien/ctrlp.vim'
+call plug#end()
+
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
 colorscheme desert
 filetype plugin indent on
 set autochdir
@@ -19,7 +25,7 @@ set list
 set nocompatible
 set nowrap
 set number
-set path+=**
+" set path+=**
 set ruler
 set shiftround
 set shiftwidth=2
@@ -70,6 +76,6 @@ endif
 
 " vim-javascript
 augroup vimrc-javascript
-    autocmd!
-    autocmd FileType javascript set tabstop=2|set shiftwidth=2|set expandtab softtabstop=2
+  autocmd!
+  autocmd FileType javascript set tabstop=2|set shiftwidth=2|set expandtab softtabstop=2
 augroup END

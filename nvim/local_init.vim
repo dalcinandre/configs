@@ -1,5 +1,7 @@
 set encoding=UTF-8
 
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
 let g:vrc_curl_opts = {
             \ '-s': '',
             \ '-S': '',
