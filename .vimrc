@@ -1,3 +1,9 @@
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin('~/.vim/plugged')
 Plug 'kien/ctrlp.vim'
 call plug#end()
@@ -46,6 +52,7 @@ set wildmode=longest:list,full
 set wrapscan
 set bg=light
 syntax on
+set relativenumber
 
 autocmd BufWritePre * %s/\s\+$//e
 autocmd BufWritePre * %s///e
