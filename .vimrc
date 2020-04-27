@@ -44,7 +44,6 @@ set smarttab
 set softtabstop=2
 set splitbelow
 set splitright
-set statusline=%=%m\ %c\ %P\ %f
 set textwidth=100
 set ttyfast
 set wildmenu
@@ -54,18 +53,37 @@ set bg=light
 syntax on
 set relativenumber
 set colorcolumn=81
-set spelllang=en_us,pt_br
-set spell
+" set spelllang=en_us,pt_br
+" set spell
 
-map <C-s> :source ~/.vimrc<Cr>
+" statusline
+" set statusline=%=%m\ %c\ %P\ %f
+set statusline=
+set statusline+=\ %M
+set statusline+=\ %y
+set statusline+=\ %r
+set statusline+=\ %F
+set statusline+=%=
+set statusline+=\ %c:%l/%L
+set statusline+=\ %p%%
+set statusline+=\ [%n]
+
+map <F5> :source ~/.vimrc<Cr>
 
 autocmd BufWritePre * %s/\s\+$//e
 autocmd BufWritePre * %s///e
 
+" leader key is \
 nnoremap <leader>n :bn<cr>
 nnoremap <leader>p :bp<cr>
 nnoremap <leader>vs :vsplit<cr>
 nnoremap <leader>hs :split<cr>
+
+" resize windows
+" nnoremap <Up> :resize +2<Cr>
+" nnoremap <Down> :resize -2<Cr>
+" nnoremap <Left> :vertical resize +2<Cr>
+" nnoremap <Right> :vertical resize -2<Cr>
 
 xnoremap < <gv
 xnoremap > >gv
@@ -91,5 +109,6 @@ endif
 " vim-javascript
 augroup vimrc-javascript
   autocmd!
-  autocmd FileType javascript set tabstop=2|set shiftwidth=2|set expandtab softtabstop=2
+  autocmd FileType javascript set tabstop=2 | set shiftwidth=2 |
+  set expandtab softtabstop=2
 augroup END

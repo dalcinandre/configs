@@ -15,6 +15,12 @@ let g:vrc_response_default_content_type = 'application/json'
 
 " set list listchars=tab:⟶\ ,trail:.
 
+set relativenumber
+" set regexpengine=1
+map <F5> :source ~/.vimrc<Cr>
+xnoremap K :move '<-2<CR>gv-gv
+xnoremap J :move '>+1<CR>gv-gv
+
 set hidden
 set nowrap
 set noic
@@ -30,7 +36,7 @@ autocmd BufWritePre * %s///e
 hi Normal guibg=NONE ctermbg=NONE
 
 set ttyfast
-" set cursorline
+set cursorline
 set hls
 
 " vim-javascript
@@ -54,7 +60,9 @@ augroup END
 " nmap ct <Esc>:!ctags -R --exclude=./vendor --exclude=./node_modules ./ --PHP-kinds=+cif-dvj --JavaScript-kinds=+fcmp-v<CR><Esc>:!clear<CR><CR>
 
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'badwolf'
+" let g:airline_theme = 'badwolf'
+colorscheme gruvbox
+set bg=dark
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
