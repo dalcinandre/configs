@@ -5,7 +5,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'kien/ctrlp.vim'
+  Plug 'kien/ctrlp.vim'
 call plug#end()
 
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
@@ -21,7 +21,7 @@ set encoding=UTF-8
 set expandtab
 set ffs=unix,dos,mac
 set hidden
-set hlsearch
+set hlsearch is
 set ignorecase
 set incsearch
 set laststatus=2
@@ -53,6 +53,11 @@ set wrapscan
 set bg=light
 syntax on
 set relativenumber
+set colorcolumn=81
+set spelllang=en_us,pt_br
+set spell
+
+map <C-s> :source ~/.vimrc<Cr>
 
 autocmd BufWritePre * %s/\s\+$//e
 autocmd BufWritePre * %s///e
@@ -64,6 +69,8 @@ nnoremap <leader>hs :split<cr>
 
 xnoremap < <gv
 xnoremap > >gv
+xnoremap K :move '<-2<CR>gv-gv
+xnoremap J :move '>+1<CR>gv-gv
 
 if empty($TMUX)
   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
