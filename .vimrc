@@ -31,7 +31,6 @@ set list
 set nocompatible
 set nowrap
 set number
-" set path+=**
 set ruler
 set shiftround
 set shiftwidth=2
@@ -52,7 +51,8 @@ set wrapscan
 set bg=light
 syntax on
 set relativenumber
-set colorcolumn=81
+" set path+=**
+" set colorcolumn=81
 " set spelllang=en_us,pt_br
 " set spell
 
@@ -69,6 +69,12 @@ set statusline+=\ %p%%
 set statusline+=\ [%n]
 
 map <F5> :source ~/.vimrc<Cr>
+
+" Lexplore
+map <F2> :Lex <bar> vertical resize 30<Cr>
+let g:netrw_liststyle = 3 " mostra como uma tree
+let g:netrw_banner = 0 " remove o topo
+let g:netrw_list_hide= '.*\.swp$,.*\.pyc,.*\.git,node_modules' " exclui arquivos e diretorios
 
 autocmd BufWritePre * %s/\s\+$//e
 autocmd BufWritePre * %s///e
