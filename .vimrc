@@ -1,11 +1,11 @@
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 call plug#begin('~/.vim/plugged')
-  Plug 'kien/ctrlp.vim'
+Plug 'kien/ctrlp.vim'
 call plug#end()
 
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
@@ -14,8 +14,11 @@ colorscheme desert
 filetype plugin indent on
 set autochdir
 set autoindent
+set autoread
 set backspace=indent,eol,start
+set bg=light
 set clipboard=unnamedplus
+set cmdheight=1
 set display=lastline
 set encoding=UTF-8
 set expandtab
@@ -31,6 +34,7 @@ set list
 set nocompatible
 set nowrap
 set number
+set relativenumber
 set ruler
 set shiftround
 set shiftwidth=2
@@ -48,27 +52,31 @@ set ttyfast
 set wildmenu
 set wildmode=longest:list,full
 set wrapscan
-set bg=light
 syntax on
-set relativenumber
 " set path+=**
 " set colorcolumn=81
 " set spelllang=en_us,pt_br
 " set spell
 
 " statusline
-" set statusline=%=%m\ %c\ %P\ %f
-set statusline=
-set statusline+=\ %M
-set statusline+=\ %y
-set statusline+=\ %r
-set statusline+=\ %F
-set statusline+=%=
-set statusline+=\ %c:%l/%L
-set statusline+=\ %p%%
-set statusline+=\ [%n]
+if has("statusline")
+  set statusline=
+  " set statusline+=%#PmenuSel#
+  set statusline+=%#LineNr#
+  set statusline+=\ %M
+  set statusline+=\ %r
+  set statusline+=\ %F
+  set statusline+=\ %m
+  set statusline+=%=
+  set statusline+=\ %y
+  set statusline+=\ [%{&fileencoding?&fileencoding:&encoding}]
+  set statusline+=\ [%{&fileformat}]
+  set statusline+=\ %c:%l/%L
+  set statusline+=\ %p%%
+  set statusline+=\ [%n]
+endif
 
-map <F5> :source ~/.vimrc<Cr>
+map <F5> :source ~/.vimrc<CR>
 
 " Lexplore
 map <F2> :Lex <bar> vertical resize 30<Cr>
@@ -91,8 +99,11 @@ nnoremap <leader>hs :split<cr>
 " nnoremap <Left> :vertical resize +2<Cr>
 " nnoremap <Right> :vertical resize -2<Cr>
 
+" ident
 xnoremap < <gv
 xnoremap > >gv
+
+" move lines
 xnoremap K :move '<-2<CR>gv-gv
 xnoremap J :move '>+1<CR>gv-gv
 
