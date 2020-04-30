@@ -79,7 +79,7 @@ endif
 map <F5> :source ~/.vimrc<CR>
 
 " Lexplore
-map <F2> :Lex <bar> vertical resize 30<Cr>
+map <C-\> :Lex <bar> vertical resize 30<Cr>
 let g:netrw_liststyle = 3 " mostra como uma tree
 let g:netrw_banner = 0 " remove o topo
 let g:netrw_list_hide= '.*\.swp$,.*\.pyc,.*\.git,node_modules' " exclui arquivos e diretorios
