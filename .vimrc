@@ -10,6 +10,9 @@ call plug#end()
 
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
+highlight ColorColumn ctermbg=grey
+call matchadd('ColorColumn', '\%81v', 100)
+
 colorscheme desert
 filetype plugin indent on
 set autochdir
