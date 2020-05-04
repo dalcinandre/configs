@@ -1,0 +1,1 @@
+:windo filter /node_modules\/|\.git\//

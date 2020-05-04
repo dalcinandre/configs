@@ -10,9 +10,6 @@ call plug#end()
 
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
-highlight ColorColumn ctermbg=grey
-call matchadd('ColorColumn', '\%81v', 100)
-
 colorscheme desert
 filetype plugin indent on
 set autochdir
@@ -132,3 +129,6 @@ augroup vimrc-javascript
   autocmd FileType javascript set tabstop=2 | set shiftwidth=2 |
   set expandtab softtabstop=2
 augroup END
+
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn', '\%81v', 100)
