@@ -6,9 +6,20 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'kien/ctrlp.vim'
+" Plug 'diepm/vim-rest-console'
 call plug#end()
 
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
+" curl rest
+" let g:vrc_curl_opts = {
+"             \ '-s': '',
+"             \ '-S': '',
+"             \ '-4': '',
+"             \ '-k': '',
+"             \ '--compressed': '',
+"             \ '--location': '',
+"             \}
 
 colorscheme desert
 filetype plugin indent on
