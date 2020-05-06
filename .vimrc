@@ -109,6 +109,15 @@ nnoremap <leader>hs :split<cr>
 " nnoremap <Down> :resize -2<Cr>
 " nnoremap <Left> :vertical resize +2<Cr>
 " nnoremap <Right> :vertical resize -2<Cr>
+execute "set <M-h>=\eh"
+nnoremap <M-h> :vertical resize +2<cr>
+execute "set <M-l>=\el"
+nnoremap <M-l> :vertical resize -2<cr>
+
+execute "set <M-j>=\ej"
+nnoremap <M-j> :resize +2<cr>
+execute "set <M-k>=\ek"
+nnoremap <M-k> :resize -2<cr>
 
 " ident
 xnoremap < <gv
