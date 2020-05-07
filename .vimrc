@@ -95,20 +95,12 @@ let g:netrw_liststyle = 3 " mostra como uma tree
 let g:netrw_banner = 0 " remove o topo
 let g:netrw_list_hide= '.*\.swp$,.*\.pyc,.*\.git,node_modules' " exclui arquivos e diretorios
 
-autocmd BufWritePre * %s/\s\+$//e
-autocmd BufWritePre * %s///e
-
 " leader key is \
 nnoremap <leader>n :bn<cr>
 nnoremap <leader>p :bp<cr>
-nnoremap <leader>vs :vsplit<cr>
-nnoremap <leader>hs :split<cr>
+nnoremap <leader>sv :vsplit<cr>
+nnoremap <leader>sh :split<cr>
 
-" resize windows
-" nnoremap <Up> :resize +2<Cr>
-" nnoremap <Down> :resize -2<Cr>
-" nnoremap <Left> :vertical resize +2<Cr>
-" nnoremap <Right> :vertical resize -2<Cr>
 execute "set <M-h>=\eh"
 nnoremap <M-h> :vertical resize +2<cr>
 execute "set <M-l>=\el"
@@ -149,6 +141,14 @@ augroup vimrc-javascript
   autocmd FileType javascript set tabstop=2 | set shiftwidth=2 |
   set expandtab softtabstop=2
 augroup END
+
+" deleta espaços e outros caracteres to arquivo
+autocmd BufWritePre * %s/\s\+$//e
+autocmd BufWritePre * %s///e
+autocmd BufWritePre * %s/$//e
+
+highlight VertSplit cterm=NONE
+" set fillchars+=vert:\
 
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
