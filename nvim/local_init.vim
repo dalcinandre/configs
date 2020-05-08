@@ -57,7 +57,8 @@ augroup vimrc-vue
     autocmd FileType vue set tabstop=2|set shiftwidth=2|set expandtab softtabstop=2
 augroup END
 
-" nmap ct <Esc>:!ctags -R --exclude=./vendor --exclude=./node_modules ./ --PHP-kinds=+cif-dvj --JavaScript-kinds=+fcmp-v<CR><Esc>:!clear<CR><CR>
+" nmap <C-j>t <Esc>:!ctags -R --exclude=./vendor --exclude=./node_modules ./ --PHP-kinds=+cif-dvj --JavaScript-kinds=+fcmp-v<CR><Esc>:!clear<CR><CR>
+nmap <silent> <C-j>t :!ctags -R --exclude=./vendor --exclude=./node_modules ./ --PHP-kinds=+cif-dvj --JavaScript-kinds=+fcmp-v<CR><Esc>:!clear<CR><CR>
 
 let g:airline_powerline_fonts = 1
 " let g:airline_theme = 'badwolf'
