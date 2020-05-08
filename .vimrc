@@ -144,6 +144,7 @@ augroup END
 
 " deleta espaços e outros caracteres to arquivo
 autocmd BufWritePre * %s/\s\+$//e
+autocmd BufWritePre * %s/\t\+$//e
 autocmd BufWritePre * %s///e
 autocmd BufWritePre * %s/$//e
 
