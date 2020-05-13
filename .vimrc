@@ -140,11 +140,11 @@ augroup vimrc-javascript
   set expandtab softtabstop=2
 augroup END
 
-" deleta espaços e outros caracteres to arquivo
+" deleta espaços e outros caracteres do arquivo
 autocmd BufWritePre * %s/\s\+$//e
 autocmd BufWritePre * %s/\t\+$//e
-autocmd BufWritePre * %s///e
 autocmd BufWritePre * %s/$//e
+autocmd BufWritePre * %s///e
 
 highlight VertSplit cterm=NONE
 " set fillchars+=vert:\

@@ -1,6 +1,7 @@
 set encoding=UTF-8
 
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+let NERDTreeIgnore = ['node_modules']
 
 let g:vrc_curl_opts = {
             \ '-s': '',
@@ -21,6 +22,7 @@ map <F5> :source ~/.vimrc<Cr>
 xnoremap K :move '<-2<CR>gv-gv
 xnoremap J :move '>+1<CR>gv-gv
 
+set autoread
 set hidden
 set nowrap
 set noic
