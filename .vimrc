@@ -84,7 +84,8 @@ if has("statusline")
   set statusline+=\ [%{&fileformat}]
   set statusline+=\ %c:%l/%L
   set statusline+=\ %p%%
-  set statusline+=\ [%n]
+  set statusline+=\ [%n
+  set statusline+=\/%{len(filter(range(1,bufnr('$')),'buflisted(v:val)'))}]
 endif
 
 map <F5> :source ~/.vimrc<CR>
