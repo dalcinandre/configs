@@ -141,6 +141,13 @@ augroup vimrc-javascript
   set expandtab softtabstop=2
 augroup END
 
+" vim-javascript
+augroup vimrc-sql
+    autocmd!
+    autocmd FileType sql set tabstop=4 | set shiftwidth=4 |
+    set expandtab softtabstop=4
+augroup END
+
 " deleta espaços e outros caracteres do arquivo
 autocmd BufWritePre * %s/\s\+$//e
 autocmd BufWritePre * %s/\t\+$//e
