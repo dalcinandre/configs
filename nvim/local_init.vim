@@ -32,6 +32,8 @@ set fileencodings=utf-8
 
 " set path+=**
 autocmd BufWritePre * %s/\s\+$//e
+autocmd BufWritePre * %s/\t\+$//e
+autocmd BufWritePre * %s/$//e
 autocmd BufWritePre * %s///e
 
 " deixar transparente o editor
@@ -82,7 +84,7 @@ let g:syntastic_check_on_wq = 0
 " noremap <down> :echoerr 'Use j to down'<CR>
 " noremap <left> :echoerr 'Use h to left'<CR>
 " noremap <right> :echoerr 'Use l to right'<CR>
-
+"
 " inoremap <up> <ESC> :echoerr 'Use k to up'<CR>
 " inoremap <down> <ESC> :echoerr 'Use j to down'<CR>
 " inoremap <left> <ESC> :echoerr 'Use h to left'<CR>
