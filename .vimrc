@@ -159,3 +159,13 @@ highlight VertSplit cterm=NONE
 
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
+
+" noremap <up> :echoerr 'Use k to up'<CR>
+" noremap <down> :echoerr 'Use j to down'<CR>
+" noremap <left> :echoerr 'Use h to left'<CR>
+" noremap <right> :echoerr 'Use l to right'<CR>
+"
+" inoremap <up> <ESC> :echoerr 'Use k to up'<CR>
+" inoremap <down> <ESC> :echoerr 'Use j to down'<CR>
+" inoremap <left> <ESC> :echoerr 'Use h to left'<CR>
+" inoremap <right> <ESC> :echoerr 'Use l to right'<CR>
