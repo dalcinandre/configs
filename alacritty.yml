@@ -1,13 +1,20 @@
+env:
+  TERM: xterm-256color
+
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
   save_to_clipboard: true
 
+live_config_reload: true
 background_opacity: 0.90
+draw_bold_text_with_bright_colors: true
+dynamic_title: true
 
 mouse:
   hide_when_typing: true
 
-live_config_reload: true
+mouse_bindings:
+  - { mouse: Middle, action: PasteSelection }
 
 cursor:
   style: Block
@@ -22,8 +29,8 @@ window:
     x: 3
     y: 3
 
+  dynamic_padding: false
   decorations: none
-
   startup_mode: Fullscreen
 
 scrolling:
@@ -51,8 +58,6 @@ font:
     x: 0
     y: 0
 
-draw_bold_text_with_bright_colors: true
-
 colors: #gruvbox
   primary:
     background: '#282828'
@@ -78,31 +83,25 @@ colors: #gruvbox
     cyan:    '#8ec07c'
     white:   '#ebdbb2'
 
-#colors: #solarized_dark
-#  primary:
-#    background: '#002b36' # base03
-#    foreground: '#839496' # base0
-#
-#  cursor:
-#    text:   '#002b36' # base03
-#    cursor: '#839496' # base0
-#
-#  normal:
-#    black:   '#073642' # base02
-#    red:     '#dc322f' # red
-#    green:   '#859900' # green
-#    yellow:  '#b58900' # yellow
-#    blue:    '#268bd2' # blue
-#    magenta: '#d33682' # magenta
-#    cyan:    '#2aa198' # cyan
-#    white:   '#eee8d5' # base2
-#
-#  bright:
-#    black:   '#586e75' # base01
-#    red:     '#cb4b16' # orange
-#    green:   '#586e75' # base01
-#    yellow:  '#657b83' # base00
-#    blue:    '#839496' # base0
-#    magenta: '#6c71c4' # violet
-#    cyan:    '#93a1a1' # base1
-#    white:   '#fdf6e3' # base3
+key_bindings:
+  - { key: V,        mods: Control|Shift,            action: Paste            }
+  - { key: C,        mods: Control|Shift,            action: Copy             }
+  - { key: Insert,   mods: Shift,                    action: PasteSelection   }
+  - { key: Key0,     mods: Control,                  action: ResetFontSize    }
+  - { key: Equals,   mods: Control,                  action: IncreaseFontSize }
+  - { key: Add,      mods: Control,                  action: IncreaseFontSize }
+  - { key: Subtract, mods: Control,                  action: DecreaseFontSize }
+  - { key: Minus,    mods: Control,                  action: DecreaseFontSize }
+
+  - { key: Paste,                                    action: Paste            }
+  - { key: Copy,                                     action: Copy             }
+  - { key: L,        mods: Control,                  action: ClearLogNotice   }
+  - { key: L,        mods: Control,                  chars:  "\x0c"           }
+  - { key: PageUp,   mods: Shift,        mode: ~Alt, action: ScrollPageUp,    }
+  - { key: PageDown, mods: Shift,        mode: ~Alt, action: ScrollPageDown   }
+  - { key: Home,     mods: Shift,        mode: ~Alt, action: ScrollToTop,     }
+  - { key: End,      mods: Shift,        mode: ~Alt, action: ScrollToBottom   }
+
+visual_bell:
+  animation: EaseOutExpo
+  duration: 0
