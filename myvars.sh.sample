@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Add your config vars and passwords
+
+export PATH="${PATH}":~/bin
+export PGPASSWORD=''
+source ~/projects/configs/psql/colors.sh

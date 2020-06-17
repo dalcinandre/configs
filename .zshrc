@@ -33,8 +33,4 @@ else
   export EDITOR='vim'
 fi
 
-source ~/projects/configs/psql/colors.sh
-export PATH="${PATH}":~/bin
-export PGPASSWORD='console.log()'
-
-alias gespub="export PGOPTIONS='--search_path=gespub' && psql -h 187.54.229.207 -p 5434 gespub"
+source ~/projects/configs/myvars.sh
