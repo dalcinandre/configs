@@ -1,3 +1,6 @@
+autoload -Uz compinit
+compinit
+
 export ZSH="/home/operador/.oh-my-zsh"
 
 ZSH_THEME="random"
@@ -34,3 +37,4 @@ else
 fi
 
 source ~/projects/configs/myvars.sh
+source <(kubectl completion zsh)

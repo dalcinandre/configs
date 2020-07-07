@@ -154,6 +154,12 @@ autocmd BufWritePre * %s/\t\+$//e
 autocmd BufWritePre * %s/$//e
 autocmd BufWritePre * %s///e
 
+" reconfigura a tabulacao do codigo em sql
+autocmd FileType sql %retab
+
+" executa na abertura do arquivo uma sincronizacao da syntax do codigo
+autocmd FileType javascript|vue %syntax sync fromstart
+
 highlight VertSplit cterm=NONE
 " set fillchars+=vert:\
 

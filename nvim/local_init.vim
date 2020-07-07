@@ -1,7 +1,13 @@
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 set encoding=UTF-8
 
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
-let NERDTreeIgnore = ['node_modules']
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git|dist|tags|'
+let NERDTreeIgnore = ['node_modules', 'dist', 'tags']
 
 let g:vrc_curl_opts = {
             \ '-s': '',
