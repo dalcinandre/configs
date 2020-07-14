@@ -1,4 +1,7 @@
-export ZSH="/home/operador/.oh-my-zsh"
+autoload -Uz compinit
+compinit
+
+export ZSH="${HOME}/.oh-my-zsh"
 
 ZSH_THEME="random"
 
@@ -33,4 +36,5 @@ else
   export EDITOR='vim'
 fi
 
+source <(kubectl completion zsh)
 source ~/projects/configs/myvars.sh

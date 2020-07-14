@@ -6,20 +6,9 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'kien/ctrlp.vim'
-" Plug 'diepm/vim-rest-console'
 call plug#end()
 
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
-
-" curl rest
-" let g:vrc_curl_opts = {
-"             \ '-s': '',
-"             \ '-S': '',
-"             \ '-4': '',
-"             \ '-k': '',
-"             \ '--compressed': '',
-"             \ '--location': '',
-"             \}
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git|tags|dist|'
 
 colorscheme desert
 filetype plugin indent on
@@ -94,7 +83,7 @@ map <F5> :source ~/.vimrc<CR>
 map <C-\> :Lex <bar> vertical resize 30<Cr>
 let g:netrw_liststyle = 3 " mostra como uma tree
 let g:netrw_banner = 0 " remove o topo
-let g:netrw_list_hide= '.*\.swp$,.*\.pyc,.*\.git,node_modules' " exclui arquivos e diretorios
+let g:netrw_list_hide= '.*\.swp$,.*\.pyc,.*\.git,node_modules,tags' " exclui arquivos e diretorios
 
 " leader key is \
 nnoremap <leader>n :bn<cr>
@@ -154,18 +143,15 @@ autocmd BufWritePre * %s/\t\+$//e
 autocmd BufWritePre * %s/$//e
 autocmd BufWritePre * %s///e
 
+" reconfigura a tabulacao do codigo em sql
+autocmd FileType sql silent! %retab
+autocmd FileType sql silent! %s/$//e
+
+" executa na abertura do arquivo uma sincronizacao da syntax do codigo
+autocmd FileType javascript|vue %syntax sync fromstart
+
 highlight VertSplit cterm=NONE
 " set fillchars+=vert:\
 
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
-
-" noremap <up> :echoerr 'Use k to up'<CR>
-" noremap <down> :echoerr 'Use j to down'<CR>
-" noremap <left> :echoerr 'Use h to left'<CR>
-" noremap <right> :echoerr 'Use l to right'<CR>
-"
-" inoremap <up> <ESC> :echoerr 'Use k to up'<CR>
-" inoremap <down> <ESC> :echoerr 'Use j to down'<CR>
-" inoremap <left> <ESC> :echoerr 'Use h to left'<CR>
-" inoremap <right> <ESC> :echoerr 'Use l to right'<CR>
