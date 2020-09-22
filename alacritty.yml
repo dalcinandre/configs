@@ -8,7 +8,6 @@ selection:
 live_config_reload: true
 # background_opacity: 1.0
 draw_bold_text_with_bright_colors: true
-dynamic_title: true
 
 mouse:
   hide_when_typing: true
@@ -21,6 +20,7 @@ cursor:
   unfocused_hollow: true
 
 window:
+  dynamic_title: true
   dimensions:
     columns: 140
     lines: 38
@@ -102,6 +102,6 @@ key_bindings:
   - { key: Home,     mods: Shift,        mode: ~Alt, action: ScrollToTop,     }
   - { key: End,      mods: Shift,        mode: ~Alt, action: ScrollToBottom   }
 
-visual_bell:
+bell:
   animation: EaseOutExpo
   duration: 0
