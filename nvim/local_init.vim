@@ -10,13 +10,13 @@ let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git|dist|tags|'
 let NERDTreeIgnore = ['node_modules', 'dist', 'tags']
 
 let g:vrc_curl_opts = {
-            \ '-s': '',
-            \ '-S': '',
-            \ '-4': '',
-            \ '-k': '',
-            \ '--compressed': '',
-            \ '--location': '',
-            \}
+      \ '-s': '',
+      \ '-S': '',
+      \ '-4': '',
+      \ '-k': '',
+      \ '--compressed': '',
+      \ '--location': '',
+      \}
 
 let g:vrc_response_default_content_type = 'application/json'
 
@@ -42,29 +42,34 @@ autocmd BufWritePre * %s/\t\+$//e
 autocmd BufWritePre * %s/$//e
 autocmd BufWritePre * %s///e
 
+" autoindent code
+set smartindent
+" autocmd BufWritePre * silent! normal gg=G
+
 " deixar transparente o editor
 hi Normal guibg=NONE ctermbg=NONE
 
 set ttyfast
-set cursorline
+" set cursorline
+set nocursorline
 set hls
 
 " vim-javascript
 augroup vimrc-rest
-    autocmd!
-    autocmd FileType rest set tabstop=2|set shiftwidth=2|set expandtab softtabstop=2
+  autocmd!
+  autocmd FileType rest set tabstop=2|set shiftwidth=2|set expandtab softtabstop=2
 augroup END
 
 " vim-javascript
 augroup vimrc-javascript
-    autocmd!
-    autocmd FileType javascript set tabstop=2|set shiftwidth=2|set expandtab softtabstop=2
+  autocmd!
+  autocmd FileType javascript set tabstop=2|set shiftwidth=2|set expandtab softtabstop=2
 augroup END
 
 " vim-vue
 augroup vimrc-vue
-    autocmd!
-    autocmd FileType vue set tabstop=2|set shiftwidth=2|set expandtab softtabstop=2
+  autocmd!
+  autocmd FileType vue set tabstop=2|set shiftwidth=2|set expandtab softtabstop=2
 augroup END
 
 " nmap <C-j>t <Esc>:!ctags -R --exclude=./vendor --exclude=./node_modules ./ --PHP-kinds=+cif-dvj --JavaScript-kinds=+fcmp-v<CR><Esc>:!clear<CR><CR>
