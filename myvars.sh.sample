@@ -3,4 +3,4 @@
 
 export PATH="${PATH}":~/bin
 export PGPASSWORD=''
-source ~/projects/configs/psql/colors.sh
+source ${HOME}/.dotfiles/psql/colors.sh
