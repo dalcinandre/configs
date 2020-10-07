@@ -23,7 +23,7 @@ alias ls='ls --color=auto'
 # PS1='[\u@\h \W]\$ '
 export GIT_PS1_SHOWDIRTYSTATE=1
 GITP="($(__git_ps1 %s))"
-PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]${GITP}\$ "
+PS1="\[\033[01;32m\]\u\[\033[39m\]@\[\033[31m\]\h\[\033[39m\]:\[\033[01;34m\]\w\[\033[00m\]${GITP}\$ "
 
 # set -o vi
 shopt -s cdspell
