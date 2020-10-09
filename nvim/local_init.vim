@@ -31,7 +31,7 @@ xnoremap J :move '>+1<CR>gv-gv
 set autoread
 set hidden
 set nowrap
-set noic
+" set noic
 set bg=light
 set inccommand=split
 set fileencodings=utf-8
