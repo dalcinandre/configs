@@ -17,7 +17,6 @@ fi
 
 [[ $DISPLAY ]] && shopt -s checkwinsize
 
-KUBECTL=$(which kubectl)
 if [ -f /usr/local/bin/kubectl ]; then
   source <(kubectl completion bash)
   alias k='kubectl'
