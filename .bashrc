@@ -17,19 +17,24 @@ fi
 
 [[ $DISPLAY ]] && shopt -s checkwinsize
 
+KUBECTL=$(which kubectl)
+if [ -f ${KUBECTL} ]; then
+  source <(kubectl completion bash)
+  alias k='kubectl'
+  complete -F __start_kubectl k
+fi
+
 alias ls='ls --color=auto'
 [ -r ~/.dotfiles/myvars.sh ] && source ~/.dotfiles/myvars.sh
 
 export GIT_PS1_SHOWDIRTYSTATE=1
-
 GITP=$(__git_ps1 %s)
 PS1="\[\033[01;32m\]\u\[\033[39m\]@\[\033[31m\]\h\[\033[39m\]:\[\033[01;34m\]\w\[\033[00m\]`[[ -n ${GITP} ]] && echo "(${GITP})"`\$ "
 
 shopt -s cdspell
 complete -d cd
-
+bind 'set completion-ignore-case on'
+bind 'set show-all-if-ambiguous on'
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
-set show-all-if-ambiguous on
-set completion-ignore-case on
 bind 'TAB:menu-complete'
