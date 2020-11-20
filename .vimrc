@@ -6,6 +6,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'kien/ctrlp.vim'
+Plug 'terryma/vim-multiple-cursors'
 call plug#end()
 
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git|tags|dist|'
