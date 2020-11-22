@@ -40,7 +40,8 @@ URxvt.termName: rxvt-256color
 *.color15: #fdf6e3
 
 !! URxvt Appearance
-URxvt.font: xft:FreeMono:style=Regular:size=12
+URxvt.font: xft:liberation mono:pixelsize=12:style=regular
+!! URxvt.font: xft:FreeMono:style=Regular:size=12
 
 Xft.dpi:        96
 Xft.antialias:  true
@@ -50,7 +51,7 @@ Xft.hintstyle:  hintslight
 Xft.autohint:   false
 Xft.lcdfilter:  lcddefault
 
-URxvt.letterSpace: -1
+URxvt.letterSpace: 0
 URxvt.lineSpace: 0
 URxvt.geometry: 92x24
 URxvt.internalBorder: 3

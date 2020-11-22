@@ -7,62 +7,73 @@
 # If the above line is not correctly displayed, fix your editor first!
 
 general {
-        colors = true
-        interval = 5
+  colors = true
+  interval = 1
 }
 
 # order += "ipv6"
 order += "volume master"
-# order += "wireless _first_"
-# order += "ethernet _first_"
+order += "wireless _first_"
+order += "ethernet _first_"
 order += "battery all"
 order += "disk /"
 order += "load"
 order += "memory"
 order += "cpu_usage"
+order += "cpu_temperature 0"
+order += "cpu_temperature 1"
 order += "tztime local"
 
 wireless _first_ {
-        format_up = "W: (%quality at %essid) %ip"
-        format_down = "W: down"
+  format_up = "W: (%quality at %essid, %bitrate) %ip"
+  format_down = "W: down"
 }
 
 ethernet _first_ {
-        format_up = "E: %ip (%speed)"
-        format_down = "E: down"
+  format_up = "E: %ip (%speed)"
+  format_down = "E: down"
 }
 
 battery all {
-        # format = "%status %percentage %remaining"
-        format = "%status %percentage %remaining %emptytime"
-        # format_down = "x"
-        status_chr = "CHR"
-        status_bat = "BAT"
-        status_unk = "UNK"
-        status_full = "FULL"
-        path = "/sys/class/power_supply/BAT%d/uevent"
-        low_threshold = 10
+  format = "%status %percentage %remaining %emptytime"
+  status_chr = "CHR"
+  status_bat = "BAT"
+  status_unk = "UNK"
+  status_full = "FULL"
+  path = "/sys/class/power_supply/BAT%d/uevent"
+  low_threshold = 10
 }
 
 disk "/" {
-        format = " %avail"
-        # format = " %avail"
+  format = "%avail"
+}
+
+cpu_temperature 0 {
+  format = " ± %degrees°"
+  path = "/sys/class/hwmon/hwmon0/temp1_input"
+  separator = false
+  separator_block_width = 3
+}
+
+cpu_temperature 1 {
+  format = "%degrees°"
+  path = "/sys/class/hwmon/hwmon3/temp2_input"
+  max_threshold = 75
 }
 
 load {
-        format = "%1min"
-        # format = "%1min %5min %15min"
+  format = "%1min"
 }
 
 memory {
-        format = "%used/%available"
-        threshold_degraded = "10%"
-        # threshold_degraded = "1G"
-        format_degraded = "MEMORY < %available"
+  format = "%used/%available"
+  threshold_degraded = "10%"
+  # format_degraded = "MEMORY < %available"
+  format_degraded = "MEM: %free"
 }
 
 tztime local {
-        format = "%Y-%m-%d %H:%M:%S"
+  format = "%Y-%m-%d %H:%M:%S"
 }
 
 cpu_usage {
@@ -71,6 +82,6 @@ cpu_usage {
 }
 
 volume master {
-  format = "♪ %volume"
-  format_muted = "♪ muted (%volume)"
+  format = "VOL %volume"
+  format_muted = "muted (%volume)"
 }
