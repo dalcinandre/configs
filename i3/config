@@ -13,6 +13,16 @@ set $mod Mod4
 
 bindsym $mod+t exec "telegram"
 bindsym $mod+b exec "brave"
+bindsym $mod+Shift+s exec "shutdown -h now"
+bindsym $mod+Control+r exec "shutdown -r now"
+bindsym Print exec --no-startup-id xfce4-screenshooter
+
+bindsym $mod+Print exec \
+    import -window $( \
+        i3-msg -t get_tree | \
+        jq 'recurse(.nodes[]) | select(.focused).window' \
+    ) png:- | \
+    xclip -selection clipboard -t image/png
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -205,6 +215,3 @@ client.focused #859900 #859900 #fdf6e3 #859900
 client.focused_inactive #073642 #073642 #eee8d5 #6c71c4
 client.unfocused #073642 #073642 #93a1a1 #586e75
 client.urgent #d33682 #d33682 #fdf6e3 #dc322f
-
-# screenshots
-bindsym --release $mod+x exec --no-startup-id import /tmp/latest-screenshot.png
