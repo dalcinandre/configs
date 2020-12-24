@@ -24,11 +24,23 @@ if [ -f /usr/local/bin/kubectl ]; then
 fi
 
 alias ls='ls --color=auto'
+alias ip='ip -c'
+
 [ -r ~/.dotfiles/myvars.sh ] && source ~/.dotfiles/myvars.sh
 
+# get current branch in git repo
+function parse_git_branch() {
+  BRANCH=$(sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/' <<< $(git branch 2> /dev/null))
+  [[ ${BRANCH} ]] && echo -e " \e[33m[$(__git_ps1 %s)]\e[0m " || echo
+}
+
 export GIT_PS1_SHOWDIRTYSTATE=1
-GITP=$(__git_ps1 %s)
-PS1="\[\033[01;32m\]\u\[\033[39m\]@\[\033[31m\]\h\[\033[39m\]:\[\033[01;34m\]\w\[\033[00m\]`[[ -n ${GITP} ]] && echo "(${GITP})"`\$ "
+COLOR_USER="\e[32m"
+COLOR_HOST="\e[31m"
+COLOR_DIR="\e[34m"
+COLOR_NORMAL="\e[0m"
+
+PS1="${COLOR_USER}\u${COLOR_NORMAL}@${COLOR_HOST}\h${COLOR_NORMAL}:${COLOR_DIR}\w${COLOR_NORMAL}\`parse_git_branch\`\$ "
 
 shopt -s cdspell
 complete -d cd
