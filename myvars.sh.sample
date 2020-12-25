@@ -3,4 +3,5 @@
 
 export PATH="${PATH}":~/bin
 export PGPASSWORD=''
+export EDITOR=vim
 source ${HOME}/.dotfiles/psql/colors.sh
