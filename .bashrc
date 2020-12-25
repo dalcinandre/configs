@@ -11,10 +11,10 @@ fi
 
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 
-#[ -d /usr/share/git/completion ] && CAMINHO="/usr/share/git/completion"
-#[ -d /usr/share/git-core/contrib/completion ] && CAMINHO="/usr/share/git-core/contrib/completion"
-#[ -r ${CAMINHO}/git-completion.bash ] && . ${CAMINHO}/git-completion.bash
-#. ${CAMINHO}/git-prompt.sh
+[ -d /usr/share/git/completion ] && CAMINHO="/usr/share/git/completion"
+[ -d /usr/share/git-core/contrib/completion ] && CAMINHO="/usr/share/git-core/contrib/completion"
+[ -r ${CAMINHO}/git-completion.bash ] && . ${CAMINHO}/git-completion.bash
+[[ ${CAMINHO} ]] && . ${CAMINHO}/git-prompt.sh
 
 [[ $DISPLAY ]] && shopt -s checkwinsize
 
