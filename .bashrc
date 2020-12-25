@@ -28,19 +28,21 @@ alias ip='ip -c'
 
 [ -r ~/.dotfiles/myvars.sh ] && source ~/.dotfiles/myvars.sh
 
+COR_USER="\[\e[33m\]"
+COR_HOST="\[\e[32m\]"
+COR_DIR="\[\e[34m\]"
+COR_GIT="\[\e[31m\]"
+COR_NORMAL="\[\e[00m\]"
+
 # get current branch in git repo
 function parse_git_branch() {
   BRANCH=$(sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/' <<< $(git branch 2> /dev/null))
-  [[ ${BRANCH} ]] && echo -e " \e[33m[$(__git_ps1 %s)]\e[0m " || echo
+  [[ ${BRANCH} ]] && echo "[$(__git_ps1 %s)]" || echo
 }
 
 export GIT_PS1_SHOWDIRTYSTATE=1
-COLOR_USER="\e[32m"
-COLOR_HOST="\e[31m"
-COLOR_DIR="\e[34m"
-COLOR_NORMAL="\e[0m"
 
-PS1="${COLOR_USER}\u${COLOR_NORMAL}@${COLOR_HOST}\h${COLOR_NORMAL}:${COLOR_DIR}\w${COLOR_NORMAL}\`parse_git_branch\`\$ "
+PS1="${COR_USER}\u${COR_NORMAL}@${COR_HOST}\h${COR_NORMAL}:${COR_DIR}\w${COR_GIT}\`parse_git_branch\`${COR_NORMAL}\\$ "
 
 shopt -s cdspell
 complete -d cd
