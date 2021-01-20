@@ -7,6 +7,7 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'kien/ctrlp.vim'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git|tags|dist|'
@@ -14,8 +15,11 @@ let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git|tags|dist|'
 colorscheme desert
 filetype plugin indent on
 set autochdir
+set exrc
+set guicursor=
 set autoindent
 set autoread
+set signcolumn=yes
 set backspace=indent,eol,start
 set bg=light
 set clipboard=unnamedplus
@@ -146,7 +150,7 @@ autocmd BufWritePre * %s///e
 
 " reconfigura a tabulacao do codigo em sql
 autocmd FileType sql silent! %retab
-autocmd FileType sql silent! %s/$//e
+" autocmd FileType sql silent! %s/$//e
 
 " executa na abertura do arquivo uma sincronizacao da syntax do codigo
 autocmd FileType javascript|vue %syntax sync fromstart
@@ -156,3 +160,9 @@ highlight VertSplit cterm=NONE
 
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
+
+highlight clear SignColumn
+highlight! link SignColumn LineNr
+highlight GitGutterAdd    guifg=#009900 ctermfg=2
+highlight GitGutterChange guifg=#bbbb00 ctermfg=3
+highlight GitGutterDelete guifg=#ff2222 ctermfg=1
