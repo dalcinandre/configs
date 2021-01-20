@@ -19,7 +19,6 @@ set exrc
 set guicursor=
 set autoindent
 set autoread
-set signcolumn=yes
 set backspace=indent,eol,start
 set bg=light
 set clipboard=unnamedplus
@@ -161,6 +160,10 @@ highlight VertSplit cterm=NONE
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
 
+" autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
+" set signcolumn=yes
+" autocmd BufEnter * sign define dummy
+" autocmd BufRead,BufNewFile * setlocal signcolumn=yes
 highlight clear SignColumn
 highlight! link SignColumn LineNr
 highlight GitGutterAdd    guifg=#009900 ctermfg=2
