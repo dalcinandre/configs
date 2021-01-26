@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 #
 
-CURL=$(which curl 2> /dev/null)
+which curl 2> /dev/null > /dev/null
 
-[[ ! -e $CURL ]] && {
+[[ $? -gt 0 ]] && {
   echo -e '\e[031mCurl nao encontrado no sistema\e[0m'
   exit 1
 }
@@ -14,7 +14,7 @@ GRE="\e[032m"
 NOR="\e[0m"
 
 executa_opcao() {
-  $CURL -q 'http://172.16.0.21:3000/lampada/'$1
+  curl -q ${CASA}/$1
   [[ $? -eq 0 ]] && menu
 }
 
