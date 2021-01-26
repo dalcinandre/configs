@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+#
+
+CURL=$(which curl 2> /dev/null)
+
+[[ ! -e $CURL ]] && {
+  echo -e '\e[031mCurl nao encontrado no sistema\e[0m'
+  exit 1
+}
+
+RED="\e[031m"
+YEL="\e[033m"
+GRE="\e[032m"
+NOR="\e[0m"
+
+executa_opcao() {
+  $CURL -q 'http://172.16.0.21:3000/lampada/'$1
+  [[ $? -eq 0 ]] && menu
+}
+
+opcoes() {
+  str_menu="\n
+${RED} 2${NOR} - ${GRE}Portao                    \n
+${RED} 6${NOR} - ${GRE}Escritorio                \n
+${RED} 7${NOR} - ${GRE}Corredor                  \n
+${RED} 8${NOR} - ${GRE}Garagem                   \n
+${RED}12${NOR} - ${GRE}Suite                     \n
+${RED}13${NOR} - ${GRE}Ilha                      \n
+${RED}14${NOR} - ${GRE}Closet                    \n
+${RED}15${NOR} - ${GRE}Quarto crianças           \n
+${RED}16${NOR} - ${GRE}Area de Serviços          \n
+${RED}18${NOR} - ${GRE}Mesa                      \n
+${RED}19${NOR} - ${GRE}Lavabo                    \n
+${RED}20${NOR} - ${GRE}Frente da casa            \n
+${RED}21${NOR} - ${GRE}Sala de Estar             \n
+${RED}23${NOR} - ${GRE}Pia                       \n
+${RED}24${NOR} - ${GRE}Banheiro Social           \n
+${RED}25${NOR} - ${GRE}Banheiro Suite            \n
+${RED}26${NOR} - ${GRE}Banheiro Cosinha          \n
+\n
+${YEL}Escolha uma das opçoes acima: ${NOR}"
+
+  echo -e -n ${str_menu}
+  read opcao
+}
+
+menu() {
+  clear
+  opcoes
+
+  case $opcao in
+    2   ) executa_opcao $opcao;;
+    6   ) executa_opcao $opcao;;
+    7   ) executa_opcao $opcao;;
+    8   ) executa_opcao $opcao;;
+    12  ) executa_opcao $opcao;;
+    13  ) executa_opcao $opcao;;
+    14  ) executa_opcao $opcao;;
+    15  ) executa_opcao $opcao;;
+    16  ) executa_opcao $opcao;;
+    18  ) executa_opcao $opcao;;
+    19  ) executa_opcao $opcao;;
+    20  ) executa_opcao $opcao;;
+    21  ) executa_opcao $opcao;;
+    23  ) executa_opcao $opcao;;
+    24  ) executa_opcao $opcao;;
+    25  ) executa_opcao $opcao;;
+    26  ) executa_opcao $opcao;;
+    ''  ) menu;;
+    q   ) exit 0;;
+  esac
+}
+
+menu
