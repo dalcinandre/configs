@@ -56,7 +56,11 @@ set ttyfast
 set wildmenu
 set wildmode=longest:list,full
 set wrapscan
-syntax on
+
+if has("syntax")
+  syntax on
+endif
+
 " set path+=**
 " set colorcolumn=81
 " set spelllang=en_us,pt_br
@@ -141,6 +145,12 @@ augroup vimrc-sql
     set expandtab softtabstop=4
 augroup END
 
+" Com fileype on
+augroup PatchDiffHighlight
+  autocmd!
+  autocmd FileType diff syntax enable
+augroup END
+
 " deleta espaços e outros caracteres do arquivo
 autocmd BufWritePre * %s/\s\+$//e
 autocmd BufWritePre * %s/\t\+$//e
@@ -159,6 +169,10 @@ highlight VertSplit cterm=NONE
 
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
+
+set listchars=tab:>~,nbsp:_,trail:.
+" exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
+set list
 
 " autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
 " set signcolumn=yes
