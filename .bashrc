@@ -45,6 +45,10 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 
 PS1="${COR_USER}\u${COR_NORMAL}@${COR_HOST}\h${COR_NORMAL}:${COR_DIR}\w${COR_GIT}\`parse_git_branch\`${COR_NORMAL}\\$ "
 
+export HISTCONTROL="$HISTCONTROL erasedups:ignoreboth"
+
+# set -o vi
+
 shopt -s cdspell
 complete -d cd
 bind 'set completion-ignore-case on'
