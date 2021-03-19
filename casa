@@ -8,6 +8,11 @@ which curl 2> /dev/null > /dev/null
   exit 1
 }
 
+[[ -z $CASA ]] && {
+  echo -e "\e[1;31mAdicione \e[33mCASA='http://172.16.0.x:port/lampada'\e[31m como variavel de ambiente!\e[0m"
+  exit 1
+}
+
 RED="\e[031m"
 YEL="\e[033m"
 GRE="\e[032m"
