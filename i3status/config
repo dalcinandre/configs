@@ -21,7 +21,7 @@ order += "load"
 order += "memory"
 order += "cpu_usage"
 order += "cpu_temperature 0"
-order += "cpu_temperature 1"
+# order += "cpu_temperature 1"
 order += "tztime local"
 
 wireless _first_ {
@@ -50,9 +50,9 @@ disk "/" {
 
 cpu_temperature 0 {
   format = " ± %degrees°"
-  path = "/sys/class/hwmon/hwmon0/temp1_input"
-  separator = false
-  separator_block_width = 3
+  path = "/sys/class/hwmon/hwmon1/temp1_input"
+  # separator = false
+  # separator_block_width = 4
 }
 
 cpu_temperature 1 {
@@ -77,7 +77,7 @@ tztime local {
 }
 
 cpu_usage {
-  format = "CPU %usage {%cpu0 %cpu1}"
+  format = "CPU %usage {%cpu0 %cpu1 %cpu2 %cpu3 %cpu4 %cpu5 %cpu6 %cpu7}"
   max_threshold = 75
 }
 
