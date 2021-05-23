@@ -1,6 +1,6 @@
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
@@ -8,11 +8,16 @@ call plug#begin('~/.vim/plugged')
 Plug 'kien/ctrlp.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'airblade/vim-gitgutter'
+Plug 'morhetz/gruvbox'
 call plug#end()
 
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git|tags|dist|'
 
-colorscheme desert
+colorscheme gruvbox
+set bg=dark
+let g:gruvbox_termcolors=16
+
+" colorscheme desert
 filetype plugin indent on
 set autochdir
 set exrc
@@ -22,7 +27,9 @@ set autoread
 set backspace=indent,eol,start
 set bg=light
 set clipboard=unnamedplus
-set cmdheight=1
+set cmdheight=2
+set updatetime=300
+set shortmess+=c
 set display=lastline
 set encoding=UTF-8
 set expandtab
@@ -59,6 +66,12 @@ set wrapscan
 
 if has("syntax")
   syntax on
+endif
+
+if has("patch-8.1.1564")
+  set signcolumn=number
+else
+  set signcolumn=yes
 endif
 
 " set path+=**
@@ -131,6 +144,8 @@ else
   let &listchars = 'tab:> ,extends:>,precedes:<,nbsp:.'
 endif
 
+set listchars=tab:>~,nbsp:_,trail:.
+
 " vim-javascript
 augroup vimrc-javascript
   autocmd!
@@ -170,9 +185,7 @@ highlight VertSplit cterm=NONE
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
 
-set listchars=tab:>~,nbsp:_,trail:.
-" exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
-set list
+nmap <silent> <C-j>t :!ctags -R --exclude=./vendor --exclude=./node_modules ./ --PHP-kinds=+cif-dvj --JavaScript-kinds=+fcmp-v<CR><Esc>:!clear<CR><CR>
 
 " autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
 " set signcolumn=yes
