@@ -8,7 +8,6 @@ call plug#begin('~/.config/nvim')
 Plug 'kien/ctrlp.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'airblade/vim-gitgutter'
-Plug 'morhetz/gruvbox'
 Plug 'machakann/vim-highlightedyank'
 Plug 'vim-scripts/AutoComplPop'
 Plug 'Yggdroot/indentLine'
@@ -16,57 +15,53 @@ Plug 'sheerun/vim-polyglot'
 Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-commentary'
 Plug 'vim-scripts/CSApprox'
+Plug 'tpope/vim-abolish'
 
-"*****************************************************************************
-"" Custom bundles
-"*****************************************************************************
+" Color
+Plug 'tomasr/molokai'
+Plug 'morhetz/gruvbox'
 
 " c
 Plug 'vim-scripts/c.vim', {'for': ['c', 'cpp']}
 Plug 'ludwig/split-manpage.vim'
 
-
 " html
-"" HTML Bundle
 Plug 'hail2u/vim-css3-syntax'
 Plug 'gorodinskiy/vim-coloresque'
 Plug 'tpope/vim-haml'
 Plug 'mattn/emmet-vim'
 
-
 " javascript
-"" Javascript Bundle
 Plug 'jelera/vim-javascript-syntax'
 
-
 " php
-"" PHP Bundle
 Plug 'arnaud-lb/vim-php-namespace'
 
-
 " python
-"" Python Bundle
 Plug 'davidhalter/jedi-vim'
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 call plug#end()
 
-colorscheme gruvbox
-let g:gruvbox_termcolors=16
+let no_buffers_menu=1
+silent! colorscheme molokai
 set bg=dark
+
+" silent! colorscheme gruvbox
+" set bg=dark
+" let g:gruvbox_termcolors=16
 
 filetype plugin indent on
 set autochdir
 set autoindent
 set autoread
 set backspace=indent,eol,start
-set clipboard=unnamedplus
 set cmdheight=2
 set display=lastline
-set encoding=UTF-8
-set expandtab
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8
 set exrc
 set ffs=unix,dos,mac
-set fileencodings=utf-8
 set guicursor=
 set hidden
 set hlsearch is
@@ -84,7 +79,6 @@ set regexpengine=1
 set relativenumber
 set ruler
 set shiftround
-set shiftwidth=2
 set shortmess+=c
 set showcmd
 set showmatch
@@ -92,7 +86,6 @@ set showmode
 set smartcase
 set smartindent
 set smarttab
-set softtabstop=2
 set splitbelow
 set splitright
 set textwidth=100
@@ -102,17 +95,47 @@ set wildmenu
 set wildmode=longest:list,full
 set wrapscan
 
+set tabstop=4
+set softtabstop=0
+set shiftwidth=2
+set expandtab
+
+set mousemodel=popup
+set t_Co=256
+set guioptions=egmrti
+set gfn=Monospace\ 10
+
+set modeline
+set modelines=10
+
+set title
+set titleold="Terminal"
+set titlestring=%F
+
+"" Set working directory
+nnoremap <leader>. :lcd %:p:h<CR>
+
+if has('unnamedplus')
+  set clipboard=unnamed,unnamedplus
+endif
+
 if has("syntax")
   syntax on
 endif
 
-map <F5> :source ~/.config/nvim/init.vim<Cr>
-xnoremap K :move '<-2<CR>gv-gv
-xnoremap J :move '>+1<CR>gv-gv
+if exists('$SHELL')
+    set shell=$SHELL
+else
+    set shell=/bin/bash
+endif
+
+map <silent> <F5> :source ~/.config/nvim/init.vim<Cr>
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 
 " ident
-xnoremap < <gv
-xnoremap > >gv
+vmap < <gv
+vmap > >gv
 
 " leader key is \
 nnoremap <leader>n :bn<cr>
@@ -131,16 +154,39 @@ augroup vimrc-rest
   autocmd FileType rest set tabstop=2|set shiftwidth=2|set expandtab softtabstop=2
 augroup END
 
+autocmd FileType c setlocal tabstop=4 shiftwidth=4 expandtab
+autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 expandtab
+
+" html
+" for html files, 2 spaces
+autocmd Filetype html setlocal ts=2 sw=2 expandtab
+
+" javascript
+let g:javascript_enable_domhtmlcss = 1
+
 " vim-javascript
 augroup vimrc-javascript
   autocmd!
-  autocmd FileType javascript set tabstop=2|set shiftwidth=2|set expandtab softtabstop=2
+  autocmd FileType javascript|vue setl tabstop=2|setl shiftwidth=2|setl expandtab softtabstop=2
 augroup END
 
-" vim-vue
-augroup vimrc-vue
+" python
+augroup vimrc-python
   autocmd!
-  autocmd FileType vue set tabstop=2|set shiftwidth=2|set expandtab softtabstop=2
+  autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8 colorcolumn=79
+      \ formatoptions+=croq softtabstop=4
+      \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+augroup END
+
+augroup vimrc-sync-fromstart
+  autocmd!
+  autocmd BufEnter * :syntax sync maxlines=200
+augroup END
+
+"" Remember cursor position
+augroup vimrc-remember-cursor-position
+  autocmd!
+  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 augroup END
 
 nmap <silent> <C-j>t :!ctags -R --exclude=./vendor --exclude=./node_modules ./ --PHP-kinds=+cif-dvj --JavaScript-kinds=+fcmp-v<CR><Esc>:!clear<CR><CR>
@@ -180,7 +226,6 @@ else
   let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
 endif
 
-" -------
 if has('multi_byte') && &encoding ==# 'utf-8'
   let &listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±'
 else
@@ -188,7 +233,6 @@ else
 endif
 
 set listchars=tab:>~,nbsp:_,trail:.
-" -------
 
 autocmd FileType sql silent! %retab
 highlight VertSplit cterm=NONE

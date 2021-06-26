@@ -25,7 +25,7 @@ executa_opcao() {
 
 opcoes() {
   str_menu="\n
-${RED} 2${NOR} - ${GRE}Portao                    \n
+${RED} 5${NOR} - ${GRE}Portao                    \n
 ${RED} 6${NOR} - ${GRE}Escritorio                \n
 ${RED} 7${NOR} - ${GRE}Corredor                  \n
 ${RED} 8${NOR} - ${GRE}Garagem                   \n
@@ -54,7 +54,7 @@ menu() {
   opcoes
 
   case $opcao in
-    2   ) executa_opcao $opcao;;
+    5   ) executa_opcao $opcao;;
     6   ) executa_opcao $opcao;;
     7   ) executa_opcao $opcao;;
     8   ) executa_opcao $opcao;;

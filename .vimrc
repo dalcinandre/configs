@@ -1,7 +1,7 @@
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --CREATE-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 call plug#begin('~/.vim/plugged')
@@ -9,15 +9,18 @@ Plug 'kien/ctrlp.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'airblade/vim-gitgutter'
 Plug 'morhetz/gruvbox'
+Plug 'tpope/vim-abolish'
+Plug 'machakann/vim-highlightedyank'
 call plug#end()
 
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git|tags|dist|'
 
-colorscheme gruvbox
-set bg=dark
-let g:gruvbox_termcolors=16
+" colorscheme gruvbox
+" set bg=light
+" let g:gruvbox_termcolors=16
+" colorscheme pablo
+" set bg=dark
 
-" colorscheme desert
 filetype plugin indent on
 set autochdir
 set exrc
@@ -25,14 +28,13 @@ set guicursor=
 set autoindent
 set autoread
 set backspace=indent,eol,start
-set bg=light
-set clipboard=unnamedplus
 set cmdheight=2
 set updatetime=300
 set shortmess+=c
 set display=lastline
-set encoding=UTF-8
-set expandtab
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8
 set ffs=unix,dos,mac
 set hidden
 set hlsearch is
@@ -45,17 +47,15 @@ set list
 set nocompatible
 set nowrap
 set number
-set relativenumber
+" set relativenumber
 set ruler
 set shiftround
-set shiftwidth=2
 set showcmd
 set showmatch
 set showmode
 set smartcase
 set smartindent
 set smarttab
-set softtabstop=2
 set splitbelow
 set splitright
 set textwidth=100
@@ -63,39 +63,67 @@ set ttyfast
 set wildmenu
 set wildmode=longest:list,full
 set wrapscan
+set tabstop=4
+set softtabstop=0
+" set softtabstop=2
+set shiftwidth=4
+" set shiftwidth=2
+set expandtab
+
+set mousemodel=popup
+set t_Co=256
+set guioptions=egmrti
+set gfn=Monospace\ 10
+
+set modeline
+set modelines=10
+
+set title
+set titleold="Terminal"
+set titlestring=%F
+
+if exists('$SHELL')
+    set shell=$SHELL
+else
+    set shell=/bin/bash
+endif
 
 if has("syntax")
-  syntax on
+    syntax on
+endif
+
+if has('unnamedplus')
+    set clipboard=unnamed,unnamedplus
 endif
 
 if has("patch-8.1.1564")
-  set signcolumn=number
+    " set signcolumn=number
+    set signcolumn=yes
 else
-  set signcolumn=yes
+    set signcolumn=yes
 endif
 
 " set path+=**
-" set colorcolumn=81
 " set spelllang=en_us,pt_br
 " set spell
 
 " statusline
 if has("statusline")
-  set statusline=
-  " set statusline+=%#PmenuSel#
-  set statusline+=%#LineNr#
-  set statusline+=\ %M
-  set statusline+=\ %r
-  set statusline+=\ %F
-  set statusline+=\ %m
-  set statusline+=%=
-  set statusline+=\ %y
-  set statusline+=\ [%{&fileencoding?&fileencoding:&encoding}]
-  set statusline+=\ [%{&fileformat}]
-  set statusline+=\ %c:%l/%L
-  set statusline+=\ %p%%
-  set statusline+=\ [%n
-  set statusline+=\/%{len(filter(range(1,bufnr('$')),'buflisted(v:val)'))}]
+    set statusline=
+    " set statusline+=%#PmenuSel#
+    set statusline+=%#LineNr#
+    set statusline+=\ %M
+    set statusline+=\ %r
+    set statusline+=\ %F
+    set statusline+=\ %m
+    set statusline+=%=
+    set statusline+=\ %y
+    set statusline+=\ [%{&fileencoding?&fileencoding:&encoding}]
+    set statusline+=\ [%{&fileformat}]
+    set statusline+=\ %c:%l/%L
+    set statusline+=\ %p%%
+    set statusline+=\ [%n
+    set statusline+=\/%{len(filter(range(1,bufnr('$')),'buflisted(v:val)'))}]
 endif
 
 map <F5> :source ~/.vimrc<CR>
@@ -106,11 +134,12 @@ let g:netrw_liststyle = 3 " mostra como uma tree
 let g:netrw_banner = 0 " remove o topo
 let g:netrw_list_hide= '.*\.swp$,.*\.pyc,.*\.git,node_modules,tags' " exclui arquivos e diretorios
 
-" leader key is \
+" leader key IS \
 nnoremap <leader>n :bn<cr>
 nnoremap <leader>p :bp<cr>
 nnoremap <leader>sv :vsplit<cr>
 nnoremap <leader>sh :split<cr>
+nnoremap <leader>. :lcd %:p:h<CR>
 
 execute "set <M-h>=\eh"
 nnoremap <M-h> :vertical resize +2<cr>
@@ -123,47 +152,91 @@ execute "set <M-k>=\ek"
 nnoremap <M-k> :resize -2<cr>
 
 " ident
-xnoremap < <gv
-xnoremap > >gv
+" xnoremap < <gv
+" xnoremap > >gv
+vmap < <gv
+vmap > >gv
 
 " move lines
-xnoremap K :move '<-2<CR>gv-gv
-xnoremap J :move '>+1<CR>gv-gv
+" xnoremap K :move '<-2<CR>gv-gv
+" xnoremap J :move '>+1<CR>gv-gv
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 
 if empty($TMUX)
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 else
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
 endif
 
 if has('multi_byte') && &encoding ==# 'utf-8'
-  let &listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±'
+    let &listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±'
 else
-  let &listchars = 'tab:> ,extends:>,precedes:<,nbsp:.'
+    let &listchars = 'tab:> ,extends:>,precedes:<,nbsp:.'
 endif
 
 set listchars=tab:>~,nbsp:_,trail:.
 
-" vim-javascript
+" c
+autocmd FileType c setlocal tabstop=4 shiftwidth=4 expandtab
+autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 expandtab
+
+" html
+autocmd Filetype html setlocal ts=2 sw=2 expandtab
+
+" javascript
+let g:javascript_enable_domhtmlcss = 1
 augroup vimrc-javascript
-  autocmd!
-  autocmd FileType javascript set tabstop=2 | set shiftwidth=2 |
-  set expandtab softtabstop=2
+    autocmd!
+    autocmd FileType javascript setl tabstop=2 | setl shiftwidth=2 | setl expandtab softtabstop=2
+
+    " executa na abertura do arquivo uma sincronizacao da syntax do codigo
+    " autocmd FileType javascript|vue %syntax sync fromstart
 augroup END
 
-" vim-javascript
+" sql
 augroup vimrc-sql
     autocmd!
-    autocmd FileType sql set tabstop=4 | set shiftwidth=4 |
-    set expandtab softtabstop=4
+    autocmd FileType *.sql setl tabstop=4 | setl shiftwidth=4 | setl expandtab softtabstop=4 | silent! %retab
+
+    autocmd BufWritePre *.sql %s/\(\(\<group\>\|\<order\>\)\{-}\s\{-}\<by\>\|\(\<left\>\|\<inner\>\|\<outer\>\)\{-}\s\{-}\<join\>\|\<update\>\|             \
+                \<all\>\|\<analyze\>\|\<and\>\|\<any\>\|\<array\>\|\<as\>\|\<case\>\|\<create\>\|\<begin\>\|\<declare\>\|\<if\>\|\<delete\>\|               \
+                \<else\>\|\<exists\>\|\<explain\>\|\<from\>\|\<index\>\|\<is\>\|\<not\>\|\<null\>\|\<on\>\|\<select\>\|\<return\>\|\<set\>\|\<else\>\|      \
+                \<some\>\|\<then\>\|\<union\>\|\<using\>\|\<when\>\|\<where\>\|\<with\>\|\<insert\>\|\<into\>\|\<begin\>\|\<function\>\)/\U&/g
+augroup END
+
+" python
+augroup vimrc-python
+    autocmd!
+    autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8 colorcolumn=79
+                \ formatoptions+=croq softtabstop=4
+                \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+augroup END
+
+augroup vimrc-sync-fromstart
+    autocmd!
+    autocmd BufEnter * :syntax sync maxlines=200
+augroup END
+
+"" Remember cursor position
+augroup vimrc-remember-cursor-position
+    autocmd!
+    autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+augroup END
+
+"" make/cmake
+augroup vimrc-make-cmake
+    autocmd!
+    autocmd FileType make setlocal noexpandtab
+    autocmd BufNewFile,BufRead CMakeLists.txt setlocal filetype=cmake
 augroup END
 
 " Com fileype on
 augroup PatchDiffHighlight
-  autocmd!
-  autocmd FileType diff syntax enable
+    autocmd!
+    autocmd FileType diff syntax enable
 augroup END
 
 " deleta espaços e outros caracteres do arquivo
@@ -171,13 +244,7 @@ autocmd BufWritePre * %s/\s\+$//e
 autocmd BufWritePre * %s/\t\+$//e
 autocmd BufWritePre * %s/$//e
 autocmd BufWritePre * %s///e
-
-" reconfigura a tabulacao do codigo em sql
-autocmd FileType sql silent! %retab
-" autocmd FileType sql silent! %s/$//e
-
-" executa na abertura do arquivo uma sincronizacao da syntax do codigo
-autocmd FileType javascript|vue %syntax sync fromstart
+command! FixWhitespace :%s/\s\+$//e
 
 highlight VertSplit cterm=NONE
 " set fillchars+=vert:\
@@ -185,7 +252,7 @@ highlight VertSplit cterm=NONE
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
 
-nmap <silent> <C-j>t :!ctags -R --exclude=./vendor --exclude=./node_modules ./ --PHP-kinds=+cif-dvj --JavaScript-kinds=+fcmp-v<CR><Esc>:!clear<CR><CR>
+nmap <silent> <C-j>t :!ctags -R --exclude=vendor --exclude=node_modules ./ --PHP-kinds=+cif-dvj --JavaScript-kinds=+fcmp-v<CR><Esc>:!clear<CR><CR>
 
 " autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
 " set signcolumn=yes
@@ -196,3 +263,6 @@ highlight! link SignColumn LineNr
 highlight GitGutterAdd    guifg=#009900 ctermfg=2
 highlight GitGutterChange guifg=#bbbb00 ctermfg=3
 highlight GitGutterDelete guifg=#ff2222 ctermfg=1
+
+" hi Visual term=reverse cterm=reverse guibg=Grey
+" hi Visual cterm=NONE ctermbg=0 ctermfg=NONE guibg=Grey40
