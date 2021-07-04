@@ -1,4 +1,4 @@
-" vim-bootstrap 
+" vim-bootstrap
 
 "*****************************************************************************
 "" Vim-PLug core
@@ -108,6 +108,8 @@ if filereadable(expand("~/.config/nvim/local_bundles.vim"))
   source ~/.config/nvim/local_bundles.vim
 endif
 
+Plug 'vim-scripts/Tabular'
+
 call plug#end()
 
 " Required:
@@ -187,7 +189,7 @@ else
   let g:indentLine_char = '┆'
   let g:indentLine_faster = 1
 
-  
+
 endif
 
 

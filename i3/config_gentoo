@@ -22,6 +22,11 @@ bindsym --release Ctrl+Shift+Print exec --no-startup-id ${HOME}/.dotfiles/i3/ctr
 
 bindsym --release Ctrl+Shift+M exec --no-startup-id ${HOME}/.dotfiles/i3/monitors.sh
 
+# aqui mudo a posição e monitor da caneta
+bindsym --release Ctrl+Shift+L exec --no-startup-id ${HOME}/.dotfiles/wacom/config.sh LVDS-1 none
+bindsym --release Ctrl+Shift+V exec --no-startup-id ${HOME}/.dotfiles/wacom/config.sh VGA-1 none
+bindsym --release Ctrl+Shift+H exec --no-startup-id ${HOME}/.dotfiles/wacom/config.sh HDMI-1 ccw
+
 # aqui serve para bloquear a tela do sistema
 bindsym --release $mod+Ctrl+l exec --no-startup-id ${HOME}/.dotfiles/i3/lock.sh
 

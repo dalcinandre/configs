@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 
-export YELLOW=`echo -e '\033[1;33m'`
-export LIGHT_CYAN=`echo -e '\033[1;36m'`
-export GREEN=`echo -e '\033[0;32m'`
-export NOCOLOR=`echo -e '\033[0m'`
-export LESS="-iMSx4 -FXR"
-export PAGER="sed \"s/^\(([0-9]\+ [rows]\+)\)/$GREEN\1$NOCOLOR/;s/^\(-\[\ RECORD\ [0-9]\+\ \][-+]\+\)/$GREEN\1$NOCOLOR/;s/|/$GREEN|$NOCOLOR/g;s/^\([-+]\+\)/$GREEN\1$NOCOLOR/\" 2>/dev/null | less"
+export GRE=`echo -e '\e[0;32m'`
+export NOR=`echo -e '\e[0m'`
+export PAGER="sed \"s/^\((\w\+ [rows]\+)\)/$GRE\1$NOR/;           \
+    s/^\(-\[\ RECORD\ \w\+\\][-+]\+\)/$GRE\1$NOR/;                \
+    s/|/$GRE|$NOR/g;                                              \
+    s/^\([-+]\+\)/$GRE\1$NOR/\" 2> /dev/null | less -iMSx4 -FXR"

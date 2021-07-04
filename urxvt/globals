@@ -1,5 +1,3 @@
-Xcursor.theme:                      Adwaita
-
 URxvt.termName:                     rxvt-256color
 
 Xft.dpi:                            96
@@ -34,7 +32,7 @@ URxvt.keysym.Control-Meta-c:        builtin-string:
 URxvt.keysym.Control-Meta-v:        builtin-string:
 
 !! Copy Paste & Other Extensions
-URxvt.perl-ext-common:              default,matcher,selection-to-clipboard,clipboard,url-select,keyboard-select
+URxvt.perl-ext-common:              default,matcher,selection-to-clipboard,clipboard,url-select,keyboard-select,font-size
 URxvt.copyCommand:                  xclip -i -selection clipboard
 URxvt.pasteCommand:                 xclip -o -selection clipboard
 URxvt.keysym.M-c:                   perl:clipboard:copy
@@ -42,6 +40,14 @@ URxvt.keysym.M-v:                   perl:clipboard:paste
 URxvt.keysym.M-Escape:              perl:keyboard-select:activate
 URxvt.keysym.M-s:                   perl:keyboard-select:search
 URxvt.keysym.M-u:                   perl:url-select:select_next
+
+!! font size please install emerge --ask x11-misc/urxvt-font-size
+URxvt.keysym.C-Up:                  font-size:increase
+URxvt.keysym.C-Down:                font-size:decrease
+URxvt.keysym.C-S-Up:                font-size:incglobal
+URxvt.keysym.C-S-Down:              font-size:decglobal
+URxvt.keysym.C-equal:               font-size:reset
+URxvt.keysym.C-slash:               font-size:show
 
 !! Url launcher
 URxvt.matcher.button:               1
