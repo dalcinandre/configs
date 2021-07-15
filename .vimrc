@@ -8,34 +8,32 @@ call plug#begin('~/.vim/plugged')
 Plug 'kien/ctrlp.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'airblade/vim-gitgutter'
-Plug 'morhetz/gruvbox'
+Plug 'severij/vadelma'
 Plug 'tpope/vim-abolish'
 Plug 'machakann/vim-highlightedyank'
+Plug 'Yggdroot/indentLine'
 call plug#end()
 
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git|tags|dist|'
 
-" colorscheme gruvbox
-" set bg=light
-" let g:gruvbox_termcolors=16
-" colorscheme pablo
-" set bg=dark
+silent! colorscheme vadelma
+set bg=dark
+let g:lightline = { 'colorscheme': 'vadelma'}
 
 filetype plugin indent on
 set autochdir
-set exrc
-set guicursor=
 set autoindent
 set autoread
 set backspace=indent,eol,start
 set cmdheight=2
-set updatetime=300
-set shortmess+=c
 set display=lastline
 set encoding=utf-8
+set expandtab
+set exrc
+set ffs=unix,dos,mac
 set fileencoding=utf-8
 set fileencodings=utf-8
-set ffs=unix,dos,mac
+set guicursor=
 set hidden
 set hlsearch is
 set ignorecase
@@ -47,28 +45,27 @@ set list
 set nocompatible
 set nowrap
 set number
-" set relativenumber
+set regexpengine=1
 set ruler
 set shiftround
+set shiftwidth=2
+set shortmess+=c
 set showcmd
 set showmatch
 set showmode
 set smartcase
 set smartindent
 set smarttab
+set softtabstop=0
 set splitbelow
 set splitright
+set tabstop=4
 set textwidth=100
 set ttyfast
+set updatetime=300
 set wildmenu
 set wildmode=longest:list,full
 set wrapscan
-set tabstop=4
-set softtabstop=0
-" set softtabstop=2
-set shiftwidth=4
-" set shiftwidth=2
-set expandtab
 
 set mousemodel=popup
 set t_Co=256
@@ -102,10 +99,6 @@ if has("patch-8.1.1564")
 else
     set signcolumn=yes
 endif
-
-" set path+=**
-" set spelllang=en_us,pt_br
-" set spell
 
 " statusline
 if has("statusline")
@@ -152,14 +145,10 @@ execute "set <M-k>=\ek"
 nnoremap <M-k> :resize -2<cr>
 
 " ident
-" xnoremap < <gv
-" xnoremap > >gv
 vmap < <gv
 vmap > >gv
 
 " move lines
-" xnoremap K :move '<-2<CR>gv-gv
-" xnoremap J :move '>+1<CR>gv-gv
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
@@ -255,7 +244,6 @@ call matchadd('ColorColumn', '\%81v', 100)
 nmap <silent> <C-j>t :!ctags -R --exclude=vendor --exclude=node_modules ./ --PHP-kinds=+cif-dvj --JavaScript-kinds=+fcmp-v<CR><Esc>:!clear<CR><CR>
 
 " autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
-" set signcolumn=yes
 " autocmd BufEnter * sign define dummy
 " autocmd BufRead,BufNewFile * setlocal signcolumn=yes
 highlight clear SignColumn

@@ -18,8 +18,7 @@ Plug 'vim-scripts/CSApprox'
 Plug 'tpope/vim-abolish'
 
 " Color
-Plug 'tomasr/molokai'
-Plug 'morhetz/gruvbox'
+Plug 'severij/vadelma'
 
 " c
 Plug 'vim-scripts/c.vim', {'for': ['c', 'cpp']}
@@ -42,13 +41,9 @@ Plug 'davidhalter/jedi-vim'
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 call plug#end()
 
-let no_buffers_menu=1
-silent! colorscheme molokai
-set bg=dark
-
-" silent! colorscheme gruvbox
-" set bg=dark
-" let g:gruvbox_termcolors=16
+silent! colorscheme vadelma
+"set bg=dark
+"let g:lightline = { 'colorscheme': 'vadelma'}
 
 filetype plugin indent on
 set autochdir
@@ -58,10 +53,11 @@ set backspace=indent,eol,start
 set cmdheight=2
 set display=lastline
 set encoding=utf-8
-set fileencoding=utf-8
-set fileencodings=utf-8
+set expandtab
 set exrc
 set ffs=unix,dos,mac
+set fileencoding=utf-8
+set fileencodings=utf-8
 set guicursor=
 set hidden
 set hlsearch is
@@ -76,9 +72,9 @@ set nocompatible
 set nowrap
 set number
 set regexpengine=1
-set relativenumber
 set ruler
 set shiftround
+set shiftwidth=2
 set shortmess+=c
 set showcmd
 set showmatch
@@ -86,19 +82,16 @@ set showmode
 set smartcase
 set smartindent
 set smarttab
+set softtabstop=0
 set splitbelow
 set splitright
+set tabstop=4
 set textwidth=100
 set ttyfast
 set updatetime=300
 set wildmenu
 set wildmode=longest:list,full
 set wrapscan
-
-set tabstop=4
-set softtabstop=0
-set shiftwidth=2
-set expandtab
 
 set mousemodel=popup
 set t_Co=256
@@ -235,14 +228,14 @@ endif
 set listchars=tab:>~,nbsp:_,trail:.
 
 autocmd FileType sql silent! %retab
-highlight VertSplit cterm=NONE
+"highlight VertSplit cterm=NONE
 
 " ------- mudar a cor da barra lateral esquerda do vim
-highlight clear SignColumn
-highlight! link SignColumn LineNr
-highlight GitGutterAdd    guifg=#009900 ctermfg=2
-highlight GitGutterChange guifg=#bbbb00 ctermfg=3
-highlight GitGutterDelete guifg=#ff2222 ctermfg=1
+"highlight clear SignColumn
+"highlight! link SignColumn LineNr
+"highlight GitGutterAdd    guifg=#009900 ctermfg=2
+"highlight GitGutterChange guifg=#bbbb00 ctermfg=3
+"highlight GitGutterDelete guifg=#ff2222 ctermfg=1
 " -------
 
 " let NERDTreeIgnore = ['node_modules', 'dist', 'tags']
