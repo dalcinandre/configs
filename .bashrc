@@ -50,11 +50,13 @@ export HISTFILESIZE=10000
 export HISTCONTROL="$HISTCONTROL erasedups:ignoreboth"
 
 # set -o vi
-
-shopt -s cdspell
+shopt -s cdspell autocd
 complete -d cd
-bind 'set completion-ignore-case on'
-bind 'set show-all-if-ambiguous on'
-bind '"\e[A": history-search-backward'
-bind '"\e[B": history-search-forward'
-bind 'TAB:menu-complete'
+set -o noclobber
+set completion-ignore-case on
+set show-all-if-ambiguous on
+bind '"\e[A":history-search-backward' 2> /dev/null
+bind '"\e[B":history-search-forward' 2> /dev/null
+bind '"\e[C":forward-char' 2> /dev/null
+bind '"\e[D":backward-char' 2> /dev/null
+bind 'TAB:menu-complete' 2> /dev/null

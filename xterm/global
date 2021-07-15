@@ -1,0 +1,21 @@
+XTerm.termName: xterm-256color
+
+XTerm.vt100.locale: false
+XTerm.vt100.utf8: true
+
+XTerm.vt100.backarrowKey: false
+XTerm.ttyModes: erase ^?
+
+XTerm.vt100.saveLines: 4096
+
+XTerm.vt100.scrollBar: false
+
+XTerm.vt100.geometry: 80x32
+
+XTerm.vt100.selectToClipboard: true
+
+XTerm.vt100.translations: #override \n\
+  Ctrl <Key>M: maximize() \n\
+  Ctrl <Key>R: restore() \n\
+  Ctrl Shift <Key>C: copy-selection(CLIPBOARD) \n\
+  Ctrl Shift <Key>V: insert-selection(CLIPBOARD)
