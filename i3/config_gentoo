@@ -11,9 +11,8 @@
 
 set $mod Mod4
 
-bindsym $mod+t exec --no-startup-id "telegram-desktop"
-bindsym Ctrl+Shift+s exec --no-startup-id "loginctl poweroff now"
-bindsym Ctrl+Shift+r exec --no-startup-id "loginctl reboot"
+bindsym Ctrl+Shift+s exec --no-startup-id "i3-nagbar -t error -m 'Você tem certeza que deseja Desligar o sistema?' -B 'Desligar' 'loginctl poweroff now'"
+bindsym Ctrl+Shift+r exec --no-startup-id "i3-nagbar -t error -m 'Você tem certeza que deseja Reiniciar o sistema?' -B 'Reiniciar' 'loginctl reboot'"
 
 #screenshots de telas e partes
 bindsym Print exec --no-startup-id ${HOME}/.dotfiles/i3/print.sh

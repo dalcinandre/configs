@@ -6,6 +6,8 @@ export PGPASSWORD=""
 export EDITOR="vim"
 source ${HOME}/.dotfiles/psql/colors.sh
 
-alias diff="diff --color=auto"
-alias grep="grep --color=auto"
+alias diff="diff --color=always"
+alias grep="grep --color=always"
 export LESS='-R --use-color -Dd+r$Du+b'
+alias wcalc="wcalc --color"
+alias man="PAGER=less man"

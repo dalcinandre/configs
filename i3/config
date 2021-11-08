@@ -11,8 +11,8 @@
 
 set $mod Mod4
 
-bindsym $mod+t exec "telegram"
-bindsym $mod+b exec "brave"
+#bindsym $mod+t exec "telegram"
+#bindsym $mod+b exec "brave"
 bindsym $mod+Shift+s exec "shutdown -h now"
 bindsym $mod+Control+r exec "shutdown -r now"
 bindsym Print exec --no-startup-id "xfce4-screenshooter -s ~/Pictures"
