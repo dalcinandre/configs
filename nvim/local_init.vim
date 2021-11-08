@@ -225,7 +225,8 @@ else
   let &listchars = 'tab:> ,extends:>,precedes:<,nbsp:.'
 endif
 
-set listchars=tab:>~,nbsp:_,trail:.
+"set listchars=tab:>~,nbsp:_,trail:.
+set listchars=tab:→\ ,trail:·,precedes:«,extends:»
 
 autocmd FileType sql silent! %retab
 "highlight VertSplit cterm=NONE

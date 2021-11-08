@@ -166,7 +166,8 @@ else
     let &listchars = 'tab:> ,extends:>,precedes:<,nbsp:.'
 endif
 
-set listchars=tab:>~,nbsp:_,trail:.
+"set listchars=tab:>~,nbsp:_,trail:.
+set listchars=tab:→\ ,trail:·,precedes:«,extends:»
 
 " c
 autocmd FileType c setlocal tabstop=4 shiftwidth=4 expandtab
