@@ -1,24 +1,4 @@
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --CREATE-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-call plug#begin('~/.vim/plugged')
-Plug 'kien/ctrlp.vim'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'airblade/vim-gitgutter'
-Plug 'severij/vadelma'
-Plug 'tpope/vim-abolish'
-Plug 'machakann/vim-highlightedyank'
-Plug 'Yggdroot/indentLine'
-call plug#end()
-
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git|tags|dist|'
-
-silent! colorscheme vadelma
-set bg=dark
-let g:lightline = { 'colorscheme': 'vadelma'}
+set bg=light
 
 filetype plugin indent on
 set autochdir
@@ -79,6 +59,10 @@ set title
 set titleold="Terminal"
 set titlestring=%F
 
+set path+=**
+set wildignore+=**node_modules**
+set wildignore+=**vendor**
+
 if exists('$SHELL')
     set shell=$SHELL
 else
@@ -94,8 +78,8 @@ if has('unnamedplus')
 endif
 
 if has("patch-8.1.1564")
-    " set signcolumn=number
-    set signcolumn=yes
+    set signcolumn=number
+    " set signcolumn=yes
 else
     set signcolumn=yes
 endif
@@ -122,14 +106,14 @@ endif
 map <F5> :source ~/.vimrc<CR>
 
 " Lexplore
-map <C-\> :Lex <bar> vertical resize 30<Cr>
+nnoremap <C-\> :Lex <bar> vertical resize 30<Cr>
 let g:netrw_liststyle = 3 " mostra como uma tree
 let g:netrw_banner = 0 " remove o topo
 let g:netrw_list_hide = netrw_gitignore#Hide()
 let g:netrw_list_hide .= '.*\.swp$,.*\.pyc,.*\.git,node_modules,tags' " exclui arquivos e diretorios
 let g:netrw_list_hide .= ',\(^\|\s\s\)\zs\.\S\+'
-let g:netrw_browse_split = 2
 let g:netrw_altv = 1
+let g:netrw_browse_split = 4
 
 " leader key IS \
 nnoremap <leader>n :bn<cr>
@@ -246,7 +230,7 @@ highlight VertSplit cterm=NONE
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
 
-command! MakeTags !ctags -R .
+command! MakeTags !ctags -R --exclude=vendor --exclude=node_modules .
 nmap <silent> <C-j>t :!ctags -R --exclude=vendor --exclude=node_modules ./ --PHP-kinds=+cif-dvj --JavaScript-kinds=+fcmp-v<CR><Esc>:!clear<CR><CR>
 
 " autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
