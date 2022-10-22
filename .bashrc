@@ -53,8 +53,8 @@ export HISTCONTROL="$HISTCONTROL erasedups:ignoreboth"
 shopt -s cdspell autocd
 complete -d cd
 set -o noclobber
-set completion-ignore-case on
-set show-all-if-ambiguous on
+# set completion-ignore-case On
+# set show-all-if-ambiguous On
 bind '"\e[A":history-search-backward' 2> /dev/null
 bind '"\e[B":history-search-forward' 2> /dev/null
 bind '"\e[C":forward-char' 2> /dev/null

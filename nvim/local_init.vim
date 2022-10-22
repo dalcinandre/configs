@@ -39,6 +39,10 @@ Plug 'arnaud-lb/vim-php-namespace'
 " python
 Plug 'davidhalter/jedi-vim'
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
+
+" Snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 call plug#end()
 
 silent! colorscheme vadelma
@@ -104,6 +108,10 @@ set modelines=10
 set title
 set titleold="Terminal"
 set titlestring=%F
+
+set path+=**
+set wildignore+=**node_modules**
+set wildignore+=**vendor**
 
 "" Set working directory
 nnoremap <leader>. :lcd %:p:h<CR>
@@ -182,6 +190,7 @@ augroup vimrc-remember-cursor-position
   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 augroup END
 
+command! MakeTags !ctags -R --exclude=./vendor --exclude=./node_modules .
 nmap <silent> <C-j>t :!ctags -R --exclude=./vendor --exclude=./node_modules ./ --PHP-kinds=+cif-dvj --JavaScript-kinds=+fcmp-v<CR><Esc>:!clear<CR><CR>
 
 " statusline
@@ -209,7 +218,11 @@ let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git|dist|tags|'
 map <C-\> :Lex <bar> vertical resize 30<Cr>
 let g:netrw_liststyle = 3 " mostra como uma tree
 let g:netrw_banner = 0 " remove o topo
-let g:netrw_list_hide= '.*\.swp$,.*\.pyc,.*\.git,node_modules,tags' " exclui arquivos e diretorios
+let g:netrw_list_hide = netrw_gitignore#Hide()
+let g:netrw_list_hide .= '.*\.swp$,.*\.pyc,.*\.git,node_modules,tags' " exclui arquivos e diretorios
+let g:netrw_list_hide .= ',\(^\|\s\s\)\zs\.\S\+'
+let g:netrw_browse_split = 2
+let g:netrw_altv = 1
 
 if empty($TMUX)
   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
@@ -230,6 +243,15 @@ set listchars=tab:→\ ,trail:·,precedes:«,extends:»
 
 autocmd FileType sql silent! %retab
 "highlight VertSplit cterm=NONE
+
+highlight ColorColumn ctermbg=black
+call matchadd('ColorColumn', '\%81v', 100)
+
+" snippets
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+let g:UltiSnipsEditSplit="vertical"
 
 " ------- mudar a cor da barra lateral esquerda do vim
 "highlight clear SignColumn

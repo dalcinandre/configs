@@ -17,6 +17,7 @@ order += "wireless _first_"
 order += "ethernet _first_"
 order += "battery all"
 order += "disk /"
+order += "disk /home"
 order += "load"
 order += "memory"
 order += "cpu_usage"
@@ -48,6 +49,10 @@ disk "/" {
   format = "%avail"
 }
 
+disk "/home" {
+  format = "%avail"
+}
+
 cpu_temperature 0 {
   format = " ± %degrees°"
   path = "/sys/class/hwmon/hwmon1/temp1_input"
@@ -73,7 +78,8 @@ memory {
 }
 
 tztime local {
-  format = "%Y-%m-%d %H:%M:%S"
+  format = "%Y-%m-%d %H:%M"
+  #format = "%Y-%m-%d %H:%M:%S"
 }
 
 cpu_usage {

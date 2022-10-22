@@ -41,12 +41,12 @@ URxvt.clipboard.autocopy:           true
 !! URxvt.keysym.Control-Meta-v:        builtin-string:
 
 !! font size please install emerge --ask x11-misc/urxvt-font-size add this on per-ext-common: font-size
-URxvt.keysym.C-Up:                  font-size:increase
-URxvt.keysym.C-Down:                font-size:decrease
-URxvt.keysym.C-S-Up:                font-size:incglobal
-URxvt.keysym.C-S-Down:              font-size:decglobal
-URxvt.keysym.C-equal:               font-size:reset
-URxvt.keysym.C-slash:               font-size:show
+!!URxvt.keysym.C-Up:                  font-size:increase
+!!URxvt.keysym.C-Down:                font-size:decrease
+!!URxvt.keysym.C-S-Up:                font-size:incglobal
+!!URxvt.keysym.C-S-Down:              font-size:decglobal
+!!URxvt.keysym.C-equal:               font-size:reset
+!!URxvt.keysym.C-slash:               font-size:show
 
 !! Url launcher
 URxvt.matcher.button:               1
