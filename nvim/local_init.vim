@@ -127,7 +127,7 @@ endif
 if exists('$SHELL')
     set shell=$SHELL
 else
-    set shell=/bin/bash
+    set shell=$(which bash)
 endif
 
 map <silent> <F5> :source ~/.config/nvim/init.vim<Cr>
