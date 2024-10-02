@@ -46,18 +46,16 @@ battery all {
 }
 
 disk "/" {
-  format = "%avail"
+  format = "%percentage_free free, %avail"
 }
 
 disk "/home" {
-  format = "%avail"
+  format = "%percentage_free free, %avail"
 }
 
 cpu_temperature 0 {
-  format = " ± %degrees°"
+  format = "± %degrees°"
   path = "/sys/class/hwmon/hwmon1/temp1_input"
-  # separator = false
-  # separator_block_width = 4
 }
 
 cpu_temperature 1 {
@@ -71,7 +69,7 @@ load {
 }
 
 memory {
-  format = "%used/%available"
+  format = "%used / %available"
   threshold_degraded = "10%"
   # format_degraded = "MEMORY < %available"
   format_degraded = "MEM: %free"
