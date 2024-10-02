@@ -1,0 +1,10 @@
+! Xcursor.theme: gentoo-blue
+! Xcursor.theme: whiteglass
+! Xcursor.size: 16
+
+#include ".dotfiles/urxvt/globals"
+#include ".dotfiles/urxvt/font"
+#include ".dotfiles/urxvt/colors/gruvbox"
+
+#include ".dotfiles/xterm/global"
+#include ".dotfiles/xterm/font"

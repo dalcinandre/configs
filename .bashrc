@@ -24,9 +24,6 @@ if [ -f /usr/local/bin/kubectl ]; then
   complete -F __start_kubectl k
 fi
 
-alias ls='ls --color=auto'
-alias ip='ip -c'
-
 [ -r ~/.dotfiles/myvars.sh ] && source ~/.dotfiles/myvars.sh
 
 COR_USER="\[\e[33m\]"

@@ -44,7 +44,9 @@ set textwidth=100
 set ttyfast
 set updatetime=300
 set wildmenu
-set wildmode=longest:list,full
+" set wildmode=longest:list,full
+set wildmode=list:longest
+set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 set wrapscan
 
 set mousemodel=popup
@@ -179,10 +181,10 @@ augroup vimrc-sql
     autocmd!
     autocmd FileType *.sql setl tabstop=4 | setl shiftwidth=4 | setl expandtab softtabstop=4 | silent! %retab
 
-    autocmd BufWritePre *.sql %s/\(\(\<group\>\|\<order\>\)\{-}\s\{-}\<by\>\|\(\<left\>\|\<inner\>\|\<outer\>\)\{-}\s\{-}\<join\>\|\<update\>\|             \
-                \<all\>\|\<analyze\>\|\<and\>\|\<any\>\|\<array\>\|\<as\>\|\<case\>\|\<create\>\|\<begin\>\|\<declare\>\|\<if\>\|\<delete\>\|               \
+    autocmd BufWritePre *.sql %s/\(\(\<group\>\|\<order\>\)\{-}\s\{-}\<by\>\|\(\<left\>\|\<inner\>\|\<outer\>\)\{-}\s\{-}\<join\>\|\<update\>\|\<or\>\|     \
+                \<all\>\|\<analyze\>\|\<and\>\|\<any\>\|\<array\>\|\<as\>\|\<case\>\|\<create\>\|\<begin\>\|\<declare\>\|\<if\>\|\<delete\>\|\<end\>\|      \
                 \<else\>\|\<exists\>\|\<explain\>\|\<from\>\|\<index\>\|\<is\>\|\<not\>\|\<null\>\|\<on\>\|\<select\>\|\<return\>\|\<set\>\|\<else\>\|      \
-                \<some\>\|\<then\>\|\<union\>\|\<using\>\|\<when\>\|\<where\>\|\<with\>\|\<insert\>\|\<into\>\|\<begin\>\|\<function\>\)/\U&/g
+                \<some\>\|\<then\>\|\<union\>\|\<using\>\|\<when\>\|\<where\>\|\<with\>\|\<insert\>\|\<into\>\|\<begin\>\|\<function\>\|\<trigger\>\)/\U&/g
 augroup END
 
 " python
