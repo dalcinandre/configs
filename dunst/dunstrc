@@ -17,7 +17,8 @@
     #
     # If this option is set to mouse or keyboard, the monitor option
     # will be ignored.
-    follow = none
+
+    follow = mouse
 
     ### Geometry ###
 
@@ -68,18 +69,18 @@
     # The transparency of the window.  Range: [0; 100].
     # This option will only work if a compositing window manager is
     # present (e.g. xcompmgr, compiz, etc.). (X11 only)
-    transparency = 5
+    transparency = 15
 
     # Draw a line of "separator_height" pixel height between two
     # notifications.
     # Set to 0 to disable.
-    separator_height = 2
+    separator_height = 1
 
     # Padding between text and separator.
-    padding = 6
+    padding = 8
 
     # Horizontal padding.
-    horizontal_padding = 6
+    horizontal_padding = 10
 
     # Padding between text and icon.
     text_icon_padding = 0
@@ -89,7 +90,7 @@
     frame_width = 1
 
     # Defines color of the frame around the notification window.
-    frame_color = "#8EC07C"
+    frame_color = "#788388"
 
     # Define a color for the separator.
     # possible values are:
@@ -140,7 +141,7 @@
     #
     # It's important to note that markup inside the format option will be parsed
     # regardless of what this is set to.
-    markup = full
+    markup = yes
 
     # The format of the message.  Possible variables are:
     #   %a  appname
@@ -152,7 +153,7 @@
     #   %n  progress value if set without any extra characters
     #   %%  Literal %
     # Markup is allowed
-    format = "<b>%s</b>\n%b"
+    format = "%s %p\n%b"
 
     # Alignment of message text.
     # Possible values are "left", "center" and "right".

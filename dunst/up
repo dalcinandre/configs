@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#
+
+LEVEL=$(echo "scale=2; `brightnessctl g` / `brightnessctl m` * 100" | bc -l)
+
+[[ $(bc <<< "${LEVEL} <= 100") -eq 1 ]] && {
+  brightnessctl s 5%+ -q && dunstify -r 171 -h int:value:${LEVEL} "Brightness"
+  # brightnessctl s 5%+ -q && dunstify -r 171 -h int:value:${LEVEL} "Brightness ${LEVEL%.*}%"
+}
