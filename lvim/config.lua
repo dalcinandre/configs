@@ -1,0 +1,160 @@
+-- Read the docs: https://www.lunarvim.org/docs/configuration
+-- Video Tutorials: https://www.youtube.com/watch?v=sFA9kX-Ud_c&list=PLhoH5vyxr6QqGu0i7tt_XoVK9v-KvZ3m6
+-- Forum: https://www.reddit.com/r/lunarvim/
+-- Discord: https://discord.com/invite/Xb9B4Ny
+
+lvim.plugins                       = {
+  -- "mattn/emmet-vim",
+  "tpope/vim-abolish",
+  "mfussenegger/nvim-dap",
+  "leoluz/nvim-dap-go",
+  {
+    "f-person/git-blame.nvim",
+    event = "VeryLazy",
+    opts = {
+      message_template = " <summary> • <date> • <author> • <<sha>>",
+      date_format = "%m-%d-%Y %H:%M:%S",
+    },
+  }
+}
+
+lvim.keys.visual_block_mode        = {
+  ["<C-S-Down>"] = ":m '>+1<CR>gv=gv",
+  ["<C-S-Up>"]   = ":m '<-2<CR>gv=gv",
+}
+
+lvim.keys.normal_mode["<leader>|"] = ":vsplit<CR>"
+lvim.keys.normal_mode["<leader>_"] = ":split<CR>"
+lvim.keys.normal_mode["<tab>"]     = ":bn<CR>"
+lvim.keys.normal_mode["<S-tab>"]   = ":bp<CR>"
+
+lvim.format_on_save                = true
+vim.opt.relativenumber             = true
+lvim.builtin.dap.active            = true
+vim.wo.colorcolumn                 = "81"
+lvim.builtin.lualine.style         = "default" -- default,lvim,none
+
+--vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, { focus=false })]]
+vim.o.updatetime                   = 250
+vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+  group = vim.api.nvim_create_augroup("float_diagnostic", { clear = true }),
+  callback = function()
+    vim.diagnostic.config({
+      virtual_text = false
+    })
+    vim.diagnostic.open_float(nil, { focus = false })
+  end
+})
+
+-- Prettier configuration
+local formatters = require("lvim.lsp.null-ls.formatters")
+formatters.setup({
+  { command = "gofumpt" },
+  -- { command = "eslint" },
+  { command = "jq" },
+  {
+    command = "prettier",
+    exe = "prettier",
+  },
+})
+
+-- ESLint
+local linters = require("lvim.lsp.null-ls.linters")
+linters.setup({
+  { command = "golangci_lint" },
+  {
+    command = "eslint",
+    exe = "eslint",
+    -- args = { "-c", ".eslint.json", ".eslintrc.js", "tsconfig.json", 'jsconfig.json' }
+  },
+})
+
+local code_actions = require("lvim.lsp.null-ls.code_actions")
+code_actions.setup({
+  {
+    command = "eslint",
+    exe = "eslint",
+  },
+})
+
+local dap = require("dap")
+
+-- GOLANG
+dap.adapters.go = {
+  type = "server",
+  port = "${port}",
+  executable = {
+    command = "dlv",
+    args = { "dap", "-l", "127.0.0.1:${port}" },
+  },
+}
+dap.configurations.go = {
+  {
+    type = "go",
+    name = "Attach",
+    request = "attach",
+    processId = require("dap.utils").pick_process,
+    program = "${workspaceFolder}",
+    dlvToolPath = vim.fn.exepath("dlv"),
+  },
+  {
+    type = "go",
+    name = "Debug curr file",
+    request = "launch",
+    program = "${file}",
+    dlvToolPath = vim.fn.exepath("dlv"),
+  },
+  {
+    type = "go",
+    name = "Debug",
+    request = "launch",
+    program = "${workspaceFolder}",
+    dlvToolPath = vim.fn.exepath("dlv"),
+  },
+  {
+    type = "go",
+    name = "Debug curr test",
+    request = "launch",
+    mode = "test",
+    program = "${file}",
+    dlvToolPath = vim.fn.exepath("dlv"),
+  },
+  {
+    type = "go",
+    name = "Debug test",
+    request = "launch",
+    mode = "test",
+    program = "${workspaceFolder}",
+    dlvToolPath = vim.fn.exepath("dlv"),
+  },
+}
+
+require("lspconfig").lua_ls.setup({
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = {
+          "vim",
+          "lvim",
+        },
+      },
+    },
+  },
+})
+
+require('lspconfig').vuels.setup {}
+
+-- Telescope ignore
+require("telescope").setup({
+  defaults = {
+    file_ignore_patterns = {
+      ".git/",
+      "node_modules/",
+      "*.lock",
+      "vendor/",
+      "dist/",
+      "build/",
+      "target/",
+    }
+  }
+})

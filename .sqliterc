@@ -1,0 +1,8 @@
+.headers on
+#.mode column
+.mode table
+.timer on
+.echo on
+.show
+.timer on
+.nullvalue NULL
