@@ -1,10 +1,9 @@
--- Read the docs: https://www.lunarvim.org/docs/configuration
--- Video Tutorials: https://www.youtube.com/watch?v=sFA9kX-Ud_c&list=PLhoH5vyxr6QqGu0i7tt_XoVK9v-KvZ3m6
--- Forum: https://www.reddit.com/r/lunarvim/
--- Discord: https://discord.com/invite/Xb9B4Ny
+--Readthe docs: https://www.lunarvim.org/docs/configuration
+--VideoTutorials: https://www.youtube.com/watch?v=sFA9kX-Ud_c&list=PLhoH5vyxr6QqGu0i7tt_XoVK9v-KvZ3m6
+--Forum:https://www.reddit.com/r/lunarvim/
+--Discord:https://discord.com/invite/Xb9B4Ny
 
-lvim.plugins                       = {
-  -- "mattn/emmet-vim",
+lvim.plugins = {
   "tpope/vim-abolish",
   "mfussenegger/nvim-dap",
   "leoluz/nvim-dap-go",
@@ -15,27 +14,59 @@ lvim.plugins                       = {
       message_template = " <summary> • <date> • <author> • <<sha>>",
       date_format = "%m-%d-%Y %H:%M:%S",
     },
-  }
+  },
+  "mfussenegger/nvim-jdtls",
+  -- {
+  --   "github/copilot.vim",
+  --   event = "VeryLazy",
+  --   config = function()
+  --     -- copilot assume mapped
+  --     vim.g.copilot_assume_mapped = true
+  --     vim.g.copilot_no_tab_map = true
+  --   end,
+  -- },
+  -- {
+  --   "hrsh7th/cmp-copilot",
+  --   config = function()
+  --     lvim.builtin.cmp.formatting.source_names["copilot"] = "( )"
+  --     table.insert(lvim.builtin.cmp.sources, 2, { name = "copilot" })
+  --   end,
+  -- },
 }
 
-lvim.keys.visual_block_mode        = {
+-- vim.keymap.set('i', '<Tab>', 'copilot#Accept("\\<CR>")', {
+--   expr = true,
+--   replace_keycodes = false
+-- })
+-- vim.g.copilot_no_tab_map = true
+
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "jdtls" })
+
+vim.cmd([[
+  autocmd BufWritePre * %s/\(\s\|\t\|\r\)\+$//e
+  autocmd BufWritePre * %s///e
+  command! FixWhitespace %s/\(\s\|\t\|\r\)\+$//e
+]])
+
+lvim.keys.visual_block_mode = {
   ["<C-S-Down>"] = ":m '>+1<CR>gv=gv",
-  ["<C-S-Up>"]   = ":m '<-2<CR>gv=gv",
+  ["<C-S-Up>"] = ":m '<-2<CR>gv=gv",
 }
 
 lvim.keys.normal_mode["<leader>|"] = ":vsplit<CR>"
 lvim.keys.normal_mode["<leader>_"] = ":split<CR>"
-lvim.keys.normal_mode["<tab>"]     = ":bn<CR>"
-lvim.keys.normal_mode["<S-tab>"]   = ":bp<CR>"
+lvim.keys.normal_mode["<tab>"] = ":bn<CR>"
+lvim.keys.normal_mode["<S-tab>"] = ":bp<CR>"
+lvim.keys.normal_mode["<C-d>"] = "<C-d>zz"
+lvim.keys.normal_mode["<C-u>"] = "<C-u>zz"
 
-lvim.format_on_save                = true
-vim.opt.relativenumber             = true
-lvim.builtin.dap.active            = true
-vim.wo.colorcolumn                 = "81"
-lvim.builtin.lualine.style         = "default" -- default,lvim,none
+lvim.format_on_save = true
+vim.opt.relativenumber = true
+lvim.builtin.dap.active = true
+vim.wo.colorcolumn = "81"
+lvim.builtin.lualine.style = "default" -- default,lvim,none
+vim.o.updatetime = 250
 
---vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, { focus=false })]]
-vim.o.updatetime                   = 250
 vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
   group = vim.api.nvim_create_augroup("float_diagnostic", { clear = true }),
   callback = function()
@@ -46,26 +77,33 @@ vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
   end
 })
 
--- Prettier configuration
+lvim.lsp.automatic_installation = true
+lvim.lsp.installer.setup.automatic_installation = true
+
+--Prettierconfiguration
 local formatters = require("lvim.lsp.null-ls.formatters")
 formatters.setup({
   { command = "gofumpt" },
-  -- { command = "eslint" },
+  --{ command = "eslint" },
   { command = "jq" },
   {
     command = "prettier",
     exe = "prettier",
   },
+  {
+    command = "clang-format",
+    filetypes = { "java" },
+    extra_args = { "--style", "Google" },
+  },
 })
 
--- ESLint
+--ESLint
 local linters = require("lvim.lsp.null-ls.linters")
 linters.setup({
   { command = "golangci_lint" },
   {
     command = "eslint",
     exe = "eslint",
-    -- args = { "-c", ".eslint.json", ".eslintrc.js", "tsconfig.json", 'jsconfig.json' }
   },
 })
 
@@ -79,7 +117,7 @@ code_actions.setup({
 
 local dap = require("dap")
 
--- GOLANG
+--GOLANG
 dap.adapters.go = {
   type = "server",
   port = "${port}",
@@ -144,8 +182,8 @@ require("lspconfig").lua_ls.setup({
 
 require('lspconfig').vuels.setup {}
 
--- Telescope ignore
-require("telescope").setup({
+--Telescopeignore
+require('telescope').setup({
   defaults = {
     file_ignore_patterns = {
       ".git/",
@@ -155,6 +193,45 @@ require("telescope").setup({
       "dist/",
       "build/",
       "target/",
-    }
-  }
+      "vendor/*",
+      "%.lock",
+      "__pycache__/*",
+      "%.sqlite3",
+      "%.ipynb",
+      "node_modules/*",
+      "%.jpg",
+      "%.jpeg",
+      "%.png",
+      "%.svg",
+      "%.otf",
+      "%.ttf",
+      ".git/",
+      "%.webp",
+      ".dart_tool/",
+      ".github/",
+      ".gradle/",
+      ".idea/",
+      ".settings/",
+      ".vscode/",
+      "__pycache__/",
+      "build/",
+      "env/",
+      "gradle/",
+      "node_modules/",
+      "target/",
+      "%.pdb",
+      "%.dll",
+      "%.class",
+      "%.exe",
+      "%.cache",
+      "%.ico",
+      "%.pdf",
+      "%.dylib",
+      "%.jar",
+      "%.docx",
+      "%.met",
+      "smalljre_*/*",
+      ".vale/",
+    },
+  },
 })
