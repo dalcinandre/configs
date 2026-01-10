@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# Cores ANSI
+GREEN="$(printf '\033[0;32m')"
+BLUE="$(printf '\033[0;34m')"
+YELLOW="$(printf ='\033[0;33m')"
+RESET="$(printf '\033[0m')"
+
+# Pipeline do sed com cores diferentes
+PAGER_CMD="sed \
+  -e 's/^\(([^)]\+)\)/${YELLOW}\1${RESET}/' \
+  -e 's/^\(-\[ RECORD[^]]\+[-+]\+\)/${BLUE}\1${RESET}/' \
+  -e 's/|/${GREEN}|${RESET}/g' \
+  -e 's/^\([-+]\+\)/${GREEN}\1${RESET}/' \
+  2>/dev/null | less -iMSx4 -FXR"
+
+# Executa psql com o PAGER customizado
+PAGER="$PAGER_CMD" /usr/bin/psql "$@"
