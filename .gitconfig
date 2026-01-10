@@ -1,0 +1,38 @@
+[user]
+  email = ${GIT_EMAIL}
+  name = ${GIT_USER}
+
+[init]
+  defaultBranch = main
+
+[core]
+  editor = nvim
+  pager = delta
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  navigate = true
+  ; dark = true
+  side-by-side = true
+  line-numbers = true
+  ; syntax-theme = Dracula
+  syntax-theme = OneHalfDark
+
+[merge]
+  conflictStyle = zdiff3
+  tool = vimdiff
+
+[diff]
+  tool = delta
+  colorMoved = default
+
+[difftool "delta"]
+  cmd = delta $LOCAL $REMOTE
+  ; cmd = delta --color-only $LOCAL $REMOTE
+
+[mergetool]
+  prompt = false
+[url "git@github.com:"]
+	insteadOf = https://github.com/
