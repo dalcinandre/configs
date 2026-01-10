@@ -1,0 +1,7 @@
+[Unit]
+Description=Auto change power profile based on AC state
+After=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/set-power-profile
