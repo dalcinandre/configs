@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+STATUS_FILE="/sys/class/power_supply/AC0/online"
+
+if [ -f "$STATUS_FILE" ]; then
+  STATUS=$(cat $STATUS_FILE)
+  if [ "$STATUS" -eq 1 ]; then
+    # No carregador → desempenho
+    powerprofilesctl set performance
+  else
+    # Na bateria → balanceado
+    powerprofilesctl set balanced
+  fi
+fi

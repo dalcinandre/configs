@@ -1,0 +1,10 @@
+Como configurar
+
+1. Descubra o caminho correto da sua bateria em /sys/class/power_supply/
+  exemplo /sys/class/power_supply/AC0/online e adicione no arquivo power-profile
+2. Copie o arquivo power-profile.service para /etc/systemd/system/
+3. systemctl daemon-reload
+4. systemctl enable power-profile
+5. Copie o arquivo 99-power-profile.rules para /etc/udev/rules.d/
+6. udevadm control --reload
+7. Teste se quando esta na bateria ele muda para Power Saver e Power Performance no AC
