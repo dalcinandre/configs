@@ -8,7 +8,7 @@ if [ -f "$STATUS_FILE" ]; then
     # No carregador → desempenho
     powerprofilesctl set performance
   else
-    # Na bateria → balanceado
-    powerprofilesctl set balanced
+    # Na bateria → power-saver
+    powerprofilesctl set power-saver
   fi
 fi
