@@ -8,10 +8,11 @@ local excluded = {
   "build",
   "target",
   "public",
+  "out",
 
   "package-lock.json",
   "pnpm-lock.yaml",
-  "yarn.lock",
+  "*.lock",
 }
 return {
   "folke/snacks.nvim",
