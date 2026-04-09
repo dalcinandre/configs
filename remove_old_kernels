@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#
+
+dpkg --list | awk '/(linux-image|linux-headers)/ && /rc/ {print $2}' | xargs -i sudo apt --purge remove -y {}
