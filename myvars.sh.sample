@@ -38,3 +38,19 @@ git_branch() {
 
   echo "[${branch}${status}]"
 }
+
+# Definindo os códigos de escape de forma literal
+ESC=$(printf "\033")
+RESET="\[${ESC}[0m\]"
+BOLD="\[${ESC}[1m\]"
+
+# Cores
+C_USER="\[${ESC}[38;2;76;161;93m\]"    # $green
+C_HOST="\[${ESC}[38;2;90;150;180m\]"   # $blue
+C_PATH="\[${ESC}[38;2;102;187;117m\]"  # $green-light
+C_GIT="\[${ESC}[38;2;170;60;65m\]"     # $red
+C_INACT="\[${ESC}[38;2;150;170;168m\]" # $fg-inactive
+
+# O PROMPT
+# Usamos aspas duplas, mas escapamos o $ do git_branch com \ para ele ser dinâmico
+export PS1="${BOLD}${C_USER}\u${C_INACT}@${C_HOST}\h ${C_INACT}in ${BOLD}${C_PATH}\w${C_GIT}\$(git_branch)${RESET}\n${C_INACT}λ ${RESET}"
